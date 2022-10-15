@@ -14,9 +14,12 @@ function Navbar(){
           <li className="nav-item">
             <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/journeys" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Journeys</NavLink>
+          </li>
           {/* <li className="nav-item">
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink>
-          </li>
+          </li> */}
           <li className="nav-item">
             <NavLink to="/users" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Users</NavLink>
           </li>
@@ -28,7 +31,7 @@ function Navbar(){
           </li>
           <li className="nav-item">
             <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
-          </li> */}
+          </li>
         </ul>
       </div>
     </div>
