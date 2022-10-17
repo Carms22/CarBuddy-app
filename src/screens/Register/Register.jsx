@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { createUser } from '../../services/AuthService';
 import Input from '../../components/misc/Input';
-import { createUser } from '../../services/UserService';
 import RegisterSchema from './RegisterSchema'
 
 const INITIAL_VALUES = {
@@ -47,7 +47,7 @@ function Register() {
 
 
   return (
-    <div className="Signup container">
+    <div className="container">
       <h1>Register</h1>
 
       <form onSubmit={handleSubmit}>
@@ -59,7 +59,7 @@ function Register() {
           value={values.name}
           onChange={handleChange}
           error={errors.name}
-          onBlur={handleBlur} // Cuando dejas de hacer focus en un input
+          onBlur={handleBlur} 
         />
 
         <Input
