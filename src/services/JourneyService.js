@@ -7,3 +7,6 @@ export const getJourneys = () =>
 
 export const getJourneyDetail = (id) => 
   createHttp().get(`/journeys/${id}`).then( res => res);
+
+export const postJourney = (body) => 
+  createHttp().post("/journeys").then( res => res);

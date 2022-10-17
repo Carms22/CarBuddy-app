@@ -13,7 +13,6 @@ function Card({origin, destination, price, departureTime, creator, date}){
       </div>
     </div>
   )
-
 }
 
 export default Card;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Card from "../../components/misc/Card";
+import Card from "../../components/journeys/Card";
 import {getJourneys} from '../../services/JourneyService'
 
 function JourneysList (){
@@ -22,5 +22,7 @@ function JourneysList (){
     </div>
   )
 }
+
+
 
 export default JourneysList;
