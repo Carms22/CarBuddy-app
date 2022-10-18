@@ -5,9 +5,11 @@ const createHttp = (useAccessToken = false) => {
   const http = axios.create({
     baseURL: "http://localhost:3001/api",
   });
+  console.log("http:", http.interceptors.request);
     // interceptors response / request
     http.interceptors.request.use((request) => {
       if (useAccessToken && getAccessToken()) {
+        console.log(getAccessToken());
         // entro en este if si quiero enviar cabecera y además hay token en el localStorage
         // meto el token en la cabezera Authorization
         request.headers.Authorization = `Bearer ${getAccessToken()}`;
@@ -16,8 +18,10 @@ const createHttp = (useAccessToken = false) => {
     });
   
     http.interceptors.response.use(
+      
       (response) => response.data,
       (error) => {
+        console.log("entro en el response del BaseService")
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         if (

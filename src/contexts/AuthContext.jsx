@@ -5,12 +5,15 @@ import { verifyJWT } from '../helper/jwtHelper'
 
 const AuthContext = createContext()
 
-export const useAuthContext = () => useContext(AuthContext)
+export const useAuthContext = () =>{
+  console.log("estoy en context useContext(AuthContext)", useContext(AuthContext));
+   useContext(AuthContext)}
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState()
 
   const login = (token) => {
+    console.log("estoy en el login del AuthCntxProvides...token:", token);
     setToken(token)
     getUser()
   }
@@ -31,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
   }, [])
+  console.log("entro en AuthContexProvider...user:", user );
 
   const value = {
     user,

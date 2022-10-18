@@ -9,6 +9,7 @@ export const setToken = (token) => {
 
 export const getAccessToken = () => {
   console.log(window.location);
+  console.log(accessToken);
   return accessToken; // nos devuelve el token del localStorage con la clave access_token
 };
 
