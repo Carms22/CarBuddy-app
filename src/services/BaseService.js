@@ -5,32 +5,24 @@ const createHttp = (useAccessToken = false) => {
   const http = axios.create({
     baseURL: "http://localhost:3001/api",
   });
-  console.log("http:", http.interceptors.request);
-    // interceptors response / request
     http.interceptors.request.use((request) => {
       if (useAccessToken && getAccessToken()) {
-        console.log(getAccessToken());
-        // entro en este if si quiero enviar cabecera y además hay token en el localStorage
-        // meto el token en la cabezera Authorization
+        // set token on header
         request.headers.Authorization = `Bearer ${getAccessToken()}`;
       }
       return request;
     });
-  
     http.interceptors.response.use(
-      
       (response) => response.data,
       (error) => {
-        console.log("entro en el response del BaseService")
         // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
         if (
           error?.response?.status &&
           [401, 403].includes(error.response.status) // en este if puedo entrar si no envío token o bien si esta expirado y el back ha devuelto un 401/403
         ) {
           if (getAccessToken()) {
             // delete token
-            logout(); // quitamos el access_token y redirigir a login
+            logout(); 
             if (window.location.pathname !== "/login") {
               window.location.assign("/login");
             }

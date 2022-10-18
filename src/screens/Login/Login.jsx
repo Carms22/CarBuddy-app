@@ -11,9 +11,6 @@ function Login() {
 
   const { state } = useLocation()
   const { login } = useContext(AuthContext)
-  console.log("estoy en elo login imp state",state);
-  console.log("estoy en elo login imp login constante creada del useContext(AuthContex):",login);
-
 
   const INITIAL_VALUES = {
     email: (state && state.email) || '',
@@ -30,12 +27,10 @@ function Login() {
     validateOnBlur: false,
     validateOnChange: false,
   })
-  console.log(values);
    
   const navigate = useNavigate();
   
   function onSubmit (values) {
-    console.log("estoy en onSubmit");
       userLogin(values)
         .then(({ accessToken }) => {
           login(accessToken)
@@ -44,8 +39,6 @@ function Login() {
           resetForm()
       })
       .catch(err => {
-        console.log(err.response.data)
-
         err.response.data &&
           Object.keys(err.response.data.errors)
             .forEach((errorKey) => {

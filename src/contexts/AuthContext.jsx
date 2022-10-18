@@ -13,7 +13,6 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState()
 
   const login = (token) => {
-    console.log("estoy en el login del AuthCntxProvides...token:", token);
     setToken(token)
     getUser()
   }
@@ -34,7 +33,6 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
   }, [])
-  console.log("entro en AuthContexProvider...user:", user );
 
   const value = {
     user,
