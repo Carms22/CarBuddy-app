@@ -1,19 +1,26 @@
 import React from 'react';
-//import ThemeContext from '../../contexts/ThemeContext';
-import './HomeScreen.css'
+import MapComponent from '../../components/misc/MapComponent/MapComponent';
 import JourneysList from '../Journeys/JourneysList';
+import './HomeScreen.css'
+
 
 const HomeScreen = () => {
   //const { theme, updateContext } = useContext(ThemeContext)
-
+ 
   return (
     <div className="HomeScreen">
-      <div className="jumbotron bg-dark p-5">
+      <MapComponent/>
+      <div className="bg-dark p-5">
         <h1 className="display-4">Hello, world!</h1>
         <div class="row">
+          <div>
+            Search bar!!
+          </div>
+          
           <div class="col-sm-6">
             <JourneysList />
           </div>
+  
         </div>
         {/* <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <hr className="my-4" />
