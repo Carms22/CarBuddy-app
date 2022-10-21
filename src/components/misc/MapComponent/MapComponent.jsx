@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import fetchFakeData from "../../../data/fetchFakeData";
 import Popup from "../../journeys/Popup";
 import "./MapComponent.scss";
+import SearchBar from "../SearchBar.jsx/SearchBar";
 
 
 mapboxgl.accessToken=
@@ -93,7 +94,12 @@ function MapComponent() {
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <div className="map-container" ref={mapContainerRef} />;
+  return (
+  <div className="map-container" ref={mapContainerRef} >
+    <SearchBar/>
+  </div>
+  
+  );
 
 
 

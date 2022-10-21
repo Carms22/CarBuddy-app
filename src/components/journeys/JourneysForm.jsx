@@ -2,6 +2,7 @@ import { useState } from "react";
 import { postJourney } from "../../services/JourneyService";
 import { getCurrentUser } from "../../services/UserService";
 import Input from "../misc/Input";
+import SearchBar from "../misc/SearchBar.jsx/SearchBar";
 
 /// USAR EL CONTEXT user
 function JourneyForm() {
@@ -39,14 +40,16 @@ function JourneyForm() {
             required
         />
 
-          <Input type="text"
+          <SearchBar 
+            type="text"
             name="origin" id="origin"
             value={data.origin} onChange={handleOnChange}
             placeholder="Origin of the journey"
             required
           />
 
-          <Input type="text"
+          <SearchBar 
+            type="text"
             name="destination" id="destination"
             value={data.destination} onChange={handleOnChange}
             placeholder="Destination of the journey"
