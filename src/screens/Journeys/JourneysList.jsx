@@ -11,6 +11,7 @@ function JourneysList (){
         console.log(journeys);
         setJourneys(journeys)
       })
+      .catch(err => console.log(err))
   },[])
 
   return(
