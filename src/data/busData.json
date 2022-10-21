@@ -1,92 +1,39 @@
-[{
+[
+  {
     "Node": "1",
-    "PosxNode": "433743,5",
-    "PosyNode": "4480432",
+    "features":{
+      "PosxNode": "433743,5",
+      "PosyNode": "4480432"
+    },
     "Name": "AV.VALDEMARIN-ALTAIR",
     "Lines": "161/1"
   },
   {
     "Node": "2",
-    "PosxNode": "433481,3",
-    "PosyNode": "4480271",
+    "features":{
+      "PosxNode": "433481,3",
+      "PosyNode": "4480271"
+    },
     "Name": "AV.VALDEMARIN-LA SALLE",
     "Lines": "161/1"
   },
   {
     "Node": "3",
-    "PosxNode": "433656",
-    "PosyNode": "4479857",
+    "features":{
+      "PosxNode": "433656",
+      "PosyNode": "4479857"
+    },
     "Name": "BLANCA DE CASTILLA-Cº DE LA ZARZUELA",
     "Lines": "161/1"
   },
   {
     "Node": "4",
-    "PosxNode": "433632",
-    "PosyNode": "4479467",
+    "features":{
+
+      "PosxNode": "433632",
+      "PosyNode": "4479467"
+    },
     "Name": "PLEYADES-ANA TERESA",
     "Lines": "161/1"
-  },
-  {
-    "Node": "5",
-    "PosxNode": "433613,6",
-    "PosyNode": "4479245",
-    "Name": "PLEYADES-AV.OSA MAYOR",
-    "Lines": "161/1"
-  },
-  {
-    "Node": "6",
-    "PosxNode": "433677,3",
-    "PosyNode": "4479860",
-    "Name": "BLANCA DE CASTILLA-Cº DE LA ZARZUELA",
-    "Lines": "161/2"
-  },
-  {
-    "Node": "7",
-    "PosxNode": "433502",
-    "PosyNode": "4480247",
-    "Name": "AV.VALDEMARIN-LA SALLE",
-    "Lines": "161/2"
-  },
-  {
-    "Node": "8",
-    "PosxNode": "433810,5",
-    "PosyNode": "4480406",
-    "Name": "AV.VALDEMARIN-BLANCA DE CASTILLA",
-    "Lines": "161/2"
-  },
-  {
-    "Node": "11",
-    "PosxNode": "442820",
-    "PosyNode": "4480525",
-    "Name": "AV.BURGOS-BUGANVILLA",
-    "Lines": "14/1"
-  },
-  {
-    "Node": "12",
-    "PosxNode": "431468",
-    "PosyNode": "4480424",
-    "Name": "AV.NUESTRA SRA.DE BEGOÑA-LASARTE",
-    "Lines": "162/1"
-  },
-  {
-    "Node": "13",
-    "PosxNode": "430783",
-    "PosyNode": "4480560",
-    "Name": "GUECHO-GOBELAS",
-    "Lines": "162/1"
-  },
-  {
-    "Node": "14",
-    "PosxNode": "430804",
-    "PosyNode": "4480564",
-    "Name": "GUECHO-GOBELAS",
-    "Lines": "162/1"
-  },
-  {
-    "Node": "16",
-    "PosxNode": "431172",
-    "PosyNode": "4480099",
-    "Name": "AV.VICTORIA-PADRE HUIDOBRO",
-    "Lines": "162/1"
   }
 ]

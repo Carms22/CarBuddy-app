@@ -2,6 +2,7 @@ import { useState } from "react";
 import { postJourney } from "../../services/JourneyService";
 import { getCurrentUser } from "../../services/UserService";
 import Input from "../misc/Input";
+
 /// USAR EL CONTEXT user
 function JourneyForm() {
   const [data, setData] = useState({
