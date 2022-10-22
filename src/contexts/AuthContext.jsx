@@ -5,39 +5,46 @@ import { verifyJWT } from '../helper/jwtHelper'
 
 const AuthContext = createContext()
 
-export const useAuthContext = () =>{
-  console.log("estoy en context useContext(AuthContext)", useContext(AuthContext));
-   useContext(AuthContext)}
+export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState()
+  const [isAuthFetched, setIsAuthFetched] = useState(false)
 
-  const login = (token) => {
+  const login = (token, cb) => {
     setToken(token)
-    getUser()
+
+    getUser(cb)
   }
 
   const getUser = (cb) => {
     getCurrentUser()
       .then(user => {
         setUser(user)
+        setIsAuthFetched(true)
+        // cb && cb() Callback por si queremos hacer algo justo al traernos el usuario
       })
   }
 
   useEffect(() => {
+    // Si existe token, me traigo al usuario
+
     if (getAccessToken()) {
       if (!verifyJWT(getAccessToken())) {
         logout()
       } else {
         getUser()
       }
+    } else {
+      setIsAuthFetched(true)
     }
   }, [])
 
   const value = {
     user,
     login,
-    getUser
+    getUser,
+    isAuthFetched
   }
 
   return (

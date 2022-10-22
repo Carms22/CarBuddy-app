@@ -33,10 +33,11 @@ function Login() {
   function onSubmit (values) {
       userLogin(values)
         .then(({ accessToken }) => {
-          login(accessToken)
-          setSubmitting(false)
-          navigate('/profile')
-          resetForm()
+          login(accessToken, () => {
+            //setSubmitting(false)
+            navigate('/profile')
+            //resetForm()
+          })
       })
       .catch(err => {
         err.response.data &&

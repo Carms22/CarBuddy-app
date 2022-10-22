@@ -1,5 +1,5 @@
-import { Evented } from "mapbox-gl";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { postJourney } from "../../services/JourneyService";
 import { getCurrentUser } from "../../services/UserService";
 import Input from "../misc/Input";
@@ -7,6 +7,7 @@ import SearchBar from "../misc/SearchBar.jsx/SearchBar";
 
 /// USAR EL CONTEXT user
 function JourneyForm() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     origin: {
       street: "",
@@ -25,20 +26,19 @@ function JourneyForm() {
     price: "",
     date: "",
     creator: ""
-  })
+  });
 
   const handleOnChange = (event) => {
       const { name, value } = event.target
-      const creator = getCurrentUser()
+      const creator = () => {
+        getCurrentUser()
+          .then( user => user)
+      }
       setData({...data, [name]: value, creator: creator})
   }
   const handleOnChangeVehicle = (event) => {
     const { name } = event.target
     const {value} =event.target
-    console.log("name", name);
-    console.log("value",value);
-     
-
     setData({
       ...data,
       vehicle: {
@@ -46,32 +46,39 @@ function JourneyForm() {
         [name]: value
       }
     })
-    console.log(data);
   }
 
   const handleSearchBar = (lat, long, text, fieldName) => {
     const value = {
+      location: [lat,long],
       street: text,
-      location: [long, lat]
     };
     setData({...data, [fieldName]: value})
   }
 
   const onSubmit = ( event )=> {
+    console.log(data);
     event.preventDefault()
     postJourney(data)
+      .then(result => {
+        navigate("/profile")
+      })
   }
 
   return ( 
     <div className="container">
       <form onSubmit={onSubmit}>
-        <Input 
+        <select 
            type="text"
             name="typeOf" id="typeOf"
             value={data.vehicle.typeOf} onChange={handleOnChangeVehicle}
             placeholder="Type of vehicle"
             required
-        />
+        >
+          <option value="" disabled>Select an option</option>
+          <option value="Car">Car</option>
+          <option value="Motocycle">Motocycle</option>
+        </select>
         <Input 
            type="text"
             name="seats" id="seats"
@@ -106,6 +113,13 @@ function JourneyForm() {
             placeholder="Departure time of the journey"
             required
           />
+
+          <Input type="number"
+            name="returnTime" id="returnTime"
+            value={data.returnTime} onChange={handleOnChange}
+            placeholder="Return time of the journey"
+            required
+          />
     
           <Input type="number"
             name="price" id="price"
@@ -113,7 +127,6 @@ function JourneyForm() {
             placeholder="Prices of the journey"
             required
           />
-
 
         <button>Submit</button>
       </form>

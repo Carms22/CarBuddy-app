@@ -13,7 +13,7 @@ function SearchBar({handleSearchBar, name, placeholder}) {
   //usar un callback q es handleSearchBar
   //las props name y placeholder se pasan de JourneyForm a SearchBar
   
-  function _suggestionSelect(lat, long, text) {
+  function _suggestionSelect(text, lat, long) {
     handleSearchBar(lat, long, text, name)
   }
   return (
