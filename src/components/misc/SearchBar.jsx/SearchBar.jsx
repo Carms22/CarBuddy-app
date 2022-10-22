@@ -7,12 +7,14 @@ const mapAccess = {
   "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDloY2tkdjQyZ29iM3BxdDg2enlmeTcwIn0.NgmXVYbTuJuWFyyxOxJC7Q"
 };
 
-function SearchBar(origin, destination) {
+function SearchBar({handleSearchBar, name, placeholder}) {
+  //para pasarle la info del hijo-SearchBar 
+  // al padre-JourneyFormtenemos que 
+  //usar un callback q es handleSearchBar
+  //las props name y placeholder se pasan de JourneyForm a SearchBar
   
-  function _suggestionSelect(result, lat, long, text) {
-    origin.location =[lat, long]
-    destination.location=[lat,long]
-    console.log(result, lat, long, text);
+  function _suggestionSelect(lat, long, text) {
+    handleSearchBar(lat, long, text, name)
   }
   return (
     <div className="">
@@ -24,7 +26,7 @@ function SearchBar(origin, destination) {
           onSuggestionSelect={_suggestionSelect}
           country="es"
           resetSearch={false}
-          placeholder="Search Address..."
+          placeholder={placeholder}
         />
   
     </div>

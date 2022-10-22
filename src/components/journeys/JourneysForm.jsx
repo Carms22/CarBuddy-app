@@ -1,3 +1,4 @@
+import { Evented } from "mapbox-gl";
 import { useState } from "react";
 import { postJourney } from "../../services/JourneyService";
 import { getCurrentUser } from "../../services/UserService";
@@ -7,9 +8,18 @@ import SearchBar from "../misc/SearchBar.jsx/SearchBar";
 /// USAR EL CONTEXT user
 function JourneyForm() {
   const [data, setData] = useState({
-    origin: "",
-    destination: "",
-    seats: "",
+    origin: {
+      street: "",
+      location: []
+    },
+    destination: {
+      street: "",
+      location: []
+    },
+    vehicle: {
+      typeOf:"",
+      seats:""
+      },
     departureTime: "" ,
     returnTime: "",
     price: "",
@@ -18,14 +28,37 @@ function JourneyForm() {
   })
 
   const handleOnChange = (event) => {
-    const { name, value} = event.target
-    const creator = getCurrentUser()
-    setData({...data, [name]: value, creator: creator})
+      const { name, value } = event.target
+      const creator = getCurrentUser()
+      setData({...data, [name]: value, creator: creator})
+  }
+  const handleOnChangeVehicle = (event) => {
+    const { name } = event.target
+    const {value} =event.target
+    console.log("name", name);
+    console.log("value",value);
+     
+
+    setData({
+      ...data,
+      vehicle: {
+        ...data.vehicle,
+        [name]: value
+      }
+    })
+    console.log(data);
+  }
+
+  const handleSearchBar = (lat, long, text, fieldName) => {
+    const value = {
+      street: text,
+      location: [long, lat]
+    };
+    setData({...data, [fieldName]: value})
   }
 
   const onSubmit = ( event )=> {
     event.preventDefault()
-    console.log(data);
     postJourney(data)
   }
 
@@ -33,27 +66,30 @@ function JourneyForm() {
     <div className="container">
       <form onSubmit={onSubmit}>
         <Input 
-           type="number"
+           type="text"
+            name="typeOf" id="typeOf"
+            value={data.vehicle.typeOf} onChange={handleOnChangeVehicle}
+            placeholder="Type of vehicle"
+            required
+        />
+        <Input 
+           type="text"
             name="seats" id="seats"
-            value={data.seats} onChange={handleOnChange}
+            value={data.vehicle.seats} onChange={handleOnChangeVehicle}
             placeholder="Number of seats"
             required
         />
 
           <SearchBar 
-            type="text"
-            name="origin" id="origin"
-            value={data.origin} onChange={handleOnChange}
+            name="origin"
+            handleSearchBar={handleSearchBar}
             placeholder="Origin of the journey"
-            required
           />
 
           <SearchBar 
-            type="text"
-            name="destination" id="destination"
-            value={data.destination} onChange={handleOnChange}
+            name="destination"
+            handleSearchBar={handleSearchBar}
             placeholder="Destination of the journey"
-            required
           />
 
           <Input 
