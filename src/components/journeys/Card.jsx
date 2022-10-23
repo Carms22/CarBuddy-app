@@ -1,8 +1,7 @@
 import React from "react";
-import {  NavLink } from 'react-router-dom';
+import {  Link, NavLink } from 'react-router-dom';
 
-function Card({origin, destination, price, departureTime, creator, date}){
-
+function Card({origin, destination, price, departureTime, creator, date,id}){
   return(
     <div className="card">
       <div className="card-body row">
@@ -15,8 +14,8 @@ function Card({origin, destination, price, departureTime, creator, date}){
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
         </div>
       </div>
+      <Link key={id} className="" to={`/journeys/${id}`}>Go to detail</Link>
     </div>
   )
 }
-
 export default Card;

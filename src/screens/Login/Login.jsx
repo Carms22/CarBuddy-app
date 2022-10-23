@@ -8,7 +8,6 @@ import Input from "../../components/misc/Input";
 
 
 function Login() {
-
   const { state } = useLocation()
   const { login } = useContext(AuthContext)
 
@@ -19,7 +18,7 @@ function Login() {
  
   const {
     values, handleChange, handleBlur, handleSubmit, errors,
-    isSubmitting, setSubmitting, resetForm,setFieldError
+    isSubmitting, setSubmitting, setFieldError
   } = useFormik({
     initialValues: INITIAL_VALUES,
     onSubmit: onSubmit,
@@ -34,9 +33,7 @@ function Login() {
       userLogin(values)
         .then(({ accessToken }) => {
           login(accessToken, () => {
-            //setSubmitting(false)
             navigate('/profile')
-            //resetForm()
           })
       })
       .catch(err => {

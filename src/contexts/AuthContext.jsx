@@ -4,17 +4,17 @@ import { getCurrentUser } from '../services/UserService'
 import { verifyJWT } from '../helper/jwtHelper'
 
 const AuthContext = createContext()
-
 export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState()
   const [isAuthFetched, setIsAuthFetched] = useState(false)
+  
 
   const login = (token, cb) => {
     setToken(token)
-
     getUser(cb)
+      .then( user => console.log("User in login",user))
   }
 
   const getUser = (cb) => {
@@ -27,11 +27,10 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // Si existe token, me traigo al usuario
-
     if (getAccessToken()) {
       if (!verifyJWT(getAccessToken())) {
         logout()
+          .then( ()=> console.log("Logout"))
       } else {
         getUser()
       }

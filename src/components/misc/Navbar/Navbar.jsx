@@ -12,8 +12,17 @@ function Navbar(){
       </button>
       <div className="collapse navbar-collapse" id="main-nav">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
+        <li className="nav-item">
             <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+        </li>
+        {/* {
+          user ?
+
+          :
+        } */}
+         
+          <li className="nav-item">
+            <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Profile</NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/journeys" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Journeys</NavLink>

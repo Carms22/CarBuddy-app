@@ -1,5 +1,5 @@
 import './App.css';
-import { Navigate,Route, Routes } from 'react-router-dom';
+import {Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/Home/HomeScreen';
 import Navbar from './components/misc/Navbar/Navbar';
 import JourneysList from './screens/Journeys/JourneysList'
@@ -10,6 +10,7 @@ import UserDetailScreen from './screens/Users/UserDetailScreen';
 import ProtectedRoute from "./components/misc/ProtectedRoute";
 import UnprotectedRoute from "./components/misc/UnprotectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
+import JourneyDetailScreen from './screens/Journeys/JourneyDetailScreen';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomeScreen/>}/>
         <Route path='/journeys' element={<JourneysList/>}/>
+        <Route path='/journeys/:id' element={<JourneyDetailScreen/>}/>
         <Route path='/journeys/create' element={<JourneyFormScreen/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route 
