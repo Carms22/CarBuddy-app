@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { createRoot } from 'react-dom/client';
 import mapboxgl from 'mapbox-gl';
-import fetchFakeData from "../../../data/fetchFakeData";
 import Popup from "../../journeys/Popup";
 import "./MapComponent.scss";
 import SearchBar from "../SearchBar.jsx/SearchBar";
@@ -15,7 +14,6 @@ function MapComponent() {
 
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
-  const [data, setData] = useState()
  
   // initialize map when component mounts
   useEffect(() => {
@@ -24,7 +22,7 @@ function MapComponent() {
       // See style options here: https://docs.mapbox.com/api/maps/#styles
       style: "mapbox://styles/mapbox/dark-v10",
       center: [-3.7035825, 40.4167047],
-      zoom: 9
+      zoom: 12
     });
 
     // add navigation control (zoom buttons)
@@ -54,26 +52,12 @@ function MapComponent() {
     });
 
 
-
-
-    // map.on("moveend", async () => {
-    //   // get new center coordinates
-    //   const { lng, lat } = map.getCenter();
-    //   // fetch new data
-    //   const results = await fetchFakeData({ longitude: lng, latitude: lat });
-    //   console.log(results);
-    //   // update "random-points-data" source with new data
-    //   // all layers that consume the "random-points-data" data source will be updated automatically
-    //   map.getSource("random-points-data").setData(results);
-    // });
-
     map.on("moveend", async () => {
       
       // fetch new data
       const results = await fetchJourneyData().then(results =>{
         return results
       })
-      console.log("results",results);
       // update "random-points-data" source with new data
       // all layers that consume the "random-points-data" data source will be updated automatically
       map.getSource("random-points-data").setData(results);

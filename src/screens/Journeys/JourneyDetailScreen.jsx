@@ -5,7 +5,7 @@ import AuthContext from "../../contexts/AuthContext"
 
 function JourneyDetailScreen() {
   const [journey, setJourney] = useState();
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({content: ""});
   const {id}= useParams();
   const { user } = useContext(AuthContext);
 
@@ -14,7 +14,7 @@ function JourneyDetailScreen() {
     if(comment){
       postComment(id,comment)
         .then(journey => {
-          setComment("")
+          setComment({content: ""})
         })
     } else{
       <div>You must write a comment</div>
@@ -70,7 +70,11 @@ function JourneyDetailScreen() {
           <h3 className="comment">Add a comment</h3>
           <form onSubmit={onSubmit}>
             <div className="comment-form">
-              <textarea className="" onChange={handleOnChange} name="content" id="comment-content-input" maxLength ="100"></textarea>
+              <textarea className="" 
+                onChange={handleOnChange} 
+                name="content"
+                value={comment.content} 
+                id="comment" maxLength ="100"></textarea>
               <button type="submit" className="btn btn-dark mt-3 comment-btn ">Submit</button>
             </div>
           </form>

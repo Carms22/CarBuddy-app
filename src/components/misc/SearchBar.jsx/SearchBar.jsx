@@ -19,7 +19,6 @@ function SearchBar({handleSearchBar, name, placeholder}) {
   return (
     <div className="">
       <h1>Mapbox location autocomplete</h1>
-
         <MapboxAutocomplete
           publicKey={mapAccess.mapboxApiAccessToken}
           inputClass="form-control search"
@@ -28,7 +27,6 @@ function SearchBar({handleSearchBar, name, placeholder}) {
           resetSearch={false}
           placeholder={placeholder}
         />
-  
     </div>
   );
 }
