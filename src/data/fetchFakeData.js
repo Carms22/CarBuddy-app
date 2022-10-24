@@ -29,11 +29,12 @@
       }
     });
   }
-
+  console.log(newFeaturesList);
   return Promise.resolve({
     type: "FeatureCollection",
     features: newFeaturesList
   });
+  
 };
 
 /**

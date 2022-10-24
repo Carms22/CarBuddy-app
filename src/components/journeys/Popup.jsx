@@ -3,12 +3,12 @@ import React from "react";
 
 //from to ....driver...
 const Popup = ({ feature }) => {
-  const { id, name, description } = feature.properties;
-
+  const { id, origin, destination } = feature.properties;
+  console.log('object :>> ', feature);
   return (
     <div id={`popup-${id}`}>
-      <h3>{name}</h3>
-      {description}
+      <h3>{origin}</h3>
+      {destination}
     </div>
   );
 };

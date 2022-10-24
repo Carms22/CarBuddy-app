@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import mapboxgl from 'mapbox-gl';
 import fetchFakeData from "../../../data/fetchFakeData";
 import Popup from "../../journeys/Popup";
 import "./MapComponent.scss";
 import SearchBar from "../SearchBar.jsx/SearchBar";
+import fetchJourneyData from "../../../data/journeys";
 
 
 mapboxgl.accessToken=
@@ -14,7 +15,8 @@ function MapComponent() {
 
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
-
+  const [data, setData] = useState()
+ 
   // initialize map when component mounts
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -27,7 +29,7 @@ function MapComponent() {
 
     // add navigation control (zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
-
+    
     map.on("load", () => {
       // add the data source for new a feature collection with no features
       map.addSource("random-points-data", {
@@ -51,12 +53,27 @@ function MapComponent() {
       });
     });
 
+
+
+
+    // map.on("moveend", async () => {
+    //   // get new center coordinates
+    //   const { lng, lat } = map.getCenter();
+    //   // fetch new data
+    //   const results = await fetchFakeData({ longitude: lng, latitude: lat });
+    //   console.log(results);
+    //   // update "random-points-data" source with new data
+    //   // all layers that consume the "random-points-data" data source will be updated automatically
+    //   map.getSource("random-points-data").setData(results);
+    // });
+
     map.on("moveend", async () => {
-      // get new center coordinates
-      const { lng, lat } = map.getCenter();
+      
       // fetch new data
-      const results = await fetchFakeData({ longitude: lng, latitude: lat });
-      console.log(fetchFakeData({ longitude: lng, latitude: lat }));
+      const results = await fetchJourneyData().then(results =>{
+        return results
+      })
+      console.log("results",results);
       // update "random-points-data" source with new data
       // all layers that consume the "random-points-data" data source will be updated automatically
       map.getSource("random-points-data").setData(results);
@@ -101,42 +118,6 @@ function MapComponent() {
   
   );
 
-
-
-  //   const mapContainer = useRef(null);
-  //   const map = useRef(null);
-  //   const [lng, setLng] = useState(-3.7035825);
-  //   const [lat, setLat] = useState(40.4167047);
-  //   const [zoom, setZoom] = useState(9);
-
-  // useEffect(() => {
-  //   if (map.current) return; // initialize map only once
-  //   map.current = new mapboxgl.Map({
-  //     container: mapContainer.current,
-  //     style: 'mapbox://styles/mapbox/streets-v11',
-  //     center: [lng, lat],
-  //     zoom: zoom
-  //   });
-  // });
-
-  // useEffect(() => {
-  //   if (!map.current) return; // wait for map to initialize
-  //   map.current.on('move', () => {
-  //   setLng(map.current.getCenter().lng.toFixed(4));
-  //   setLat(map.current.getCenter().lat.toFixed(4));
-  //   });
-  // });
-
-
-  // return (  
-  //   <div className="container">
-  //     <div ref={mapContainer} className="map-container" >
-  //       <div className="sidebar">
-  //         Longitude: {lng} | Latitude: {lat}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default MapComponent;
