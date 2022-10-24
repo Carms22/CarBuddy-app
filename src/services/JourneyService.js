@@ -10,3 +10,9 @@ export const getJourneyDetail = (id) =>
 
 export const postJourney = (body) => 
   http.post("/journeys", body).then( res => res);
+
+export const postComment = (id,body) => 
+  http.post(`/comments/${id}`, body).then( res => res);
+
+  export const postScore = (id, body) => 
+    http.post(`/scores/${id}`, body).then(res => res);
