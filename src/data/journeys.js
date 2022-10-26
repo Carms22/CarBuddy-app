@@ -19,11 +19,10 @@ const fetchJourneyData = () => {
           }
         })
       ))
-
-     return {
-      type: "FeatureCollection",
-      features: newFeaturesList
-     }
+      return {
+        type: "FeatureCollection",
+        features: newFeaturesList
+      }
       
     })
 };

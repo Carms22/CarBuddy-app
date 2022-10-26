@@ -10,7 +10,6 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState()
   const [isAuthFetched, setIsAuthFetched] = useState(false)
   
-
   const login = (token, cb) => {
     setToken(token)
     getUser(cb)

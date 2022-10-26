@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import {  useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { getJourneyDetail, postComment } from "../../services/JourneyService";
 import AuthContext from "../../contexts/AuthContext"
+import { postBooking } from "../../services/BookingService";
 
 function JourneyDetailScreen() {
-  const [journey, setJourney] = useState();
-  const [comment, setComment] = useState({content: ""});
   const {id}= useParams();
   const { user } = useContext(AuthContext);
+  const [journey, setJourney] = useState();
+  const [comment, setComment] = useState({content: ""});
+  const navigate = useNavigate()
+
 
   const onSubmit = (event) => {
     event.preventDefault()
@@ -24,42 +27,53 @@ function JourneyDetailScreen() {
   const handleOnChange = (event) => {
     const {name, value} = event.target;
     setComment( {...comment, [name]: value})
+      .then( comment => comment)
   }
+
+  const handleOnclick =() =>{
+    postBooking(id)  
+    navigate("/profile")      
+  }
+
 
   useEffect(() =>{
     getJourneyDetail(id)
       .then( journey => {
         setJourney(journey)
-        console.log(journey.date);
       })
       .catch(err => console.log(err))
   },[id,comment])
 
- 
-
   return (
-
     <div className="container">
       Detail
       { !journey ? "Loaiding" 
         :
         <div className="row">
-          <div>
+          <div className="col-4">
             <h1><strong>{journey.date}</strong></h1>
             <h3><strong><span>{journey.departureTime}</span><span>{journey.origin.street}</span></strong></h3>
             <h3><strong><span>{journey.returnTime}</span><span>{journey.destination.street}</span></strong></h3>
-            <h2>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h2>
           </div> 
-          <div>
-            { journey.comments? journey.comments.map( (comment) => 
-              <div  className="container" key={comment.id}>
-                <h3>{comment.commentCreator.name}</h3>
-                <p>{comment.content}</p>
-              </div> 
-              )
-              :
-              "Loading..."
-            }
+          <div className="col-4">
+            <h1><strong>{journey.vehicle.typeOf}</strong></h1>
+          </div> 
+          <div className="col-4">
+            <h2>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h2>
+            <button className="btn btn-dark" onClick={handleOnclick}>Reserve it</button>
+          </div>
+          <div className="container">
+            <div className="row">
+              { journey.comments? journey.comments.map( (comment) => 
+                <div  className="col-4" key={comment.id}>
+                  <h3>{comment.commentCreator.name}</h3>
+                  <p>{comment.content}</p>
+                </div> 
+                )
+                :
+                "Loading..."
+              }
+            </div>
           </div>
         </div>
       }
