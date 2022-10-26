@@ -9,20 +9,19 @@ const mapAccess = {
 
 function SearchBar({handleSearchBar, name, placeholder}) {
   //para pasarle la info del hijo-SearchBar 
-  // al padre-JourneyFormtenemos que 
+  // al padre-JourneyForm tenemos que 
   //usar un callback q es handleSearchBar
   //las props name y placeholder se pasan de JourneyForm a SearchBar
   
-  function _suggestionSelect(text, lat, long) {
+  function suggestionSelect(text, lat, long) {
     handleSearchBar(lat, long, text, name)
   }
   return (
     <div className="">
-      <h1>Mapbox location autocomplete</h1>
         <MapboxAutocomplete
           publicKey={mapAccess.mapboxApiAccessToken}
           inputClass="form-control search"
-          onSuggestionSelect={_suggestionSelect}
+          onSuggestionSelect={suggestionSelect}
           country="es"
           resetSearch={false}
           placeholder={placeholder}
@@ -32,22 +31,3 @@ function SearchBar({handleSearchBar, name, placeholder}) {
 }
 
 export default SearchBar;
-
-
-
-
-
-
-// import React, {useState}from "react"
-
-// function SearchBar() {
-//   const [value, setValue] = useState('');
-
-//   return (
-//   <form>
-    
-//   </form>
-//   );
-//   }
-
-// export default SearchBar;

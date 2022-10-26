@@ -4,10 +4,14 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 
 
-
 function UserDetailScreen() {
-  const { user } = useAuthContext()
-  const [bookings, setBooking] = useState([])
+  const { user } = useAuthContext();
+  const [bookings, setBooking] = useState([]);
+
+  function handleLogout(){
+    logout()
+      .then(result => console.log("you just logout"))
+  }
 
   useEffect( ()=> {
     getBookings()
@@ -15,12 +19,7 @@ function UserDetailScreen() {
       .catch(err => console.log(err))
   },[])
 
-  console.log(bookings);
-  
-  function handleLogout(){
-    logout()
-      .then(result => console.log("you just logout"))
-  }
+ console.log("entro");
   return ( 
     <div>
       <h1>Welcome to your profile {user.name}</h1>

@@ -16,3 +16,6 @@ export const postComment = (id,body) =>
 
 export const postScore = (id, body) => 
   http.post(`/scores/${id}`, body).then(res => res);
+
+export const getScore = () => 
+  http.get('/scores').then( res => res)

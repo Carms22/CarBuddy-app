@@ -23,7 +23,6 @@ const fetchJourneyData = () => {
         type: "FeatureCollection",
         features: newFeaturesList
       }
-      
     })
 };
 

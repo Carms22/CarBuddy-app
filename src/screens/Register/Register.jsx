@@ -22,6 +22,7 @@ function Register() {
     validateOnChange: false,
   })
 
+  /// email toLoweCase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
   const navigate = useNavigate();
 
   function onSubmit(values) { 

@@ -8,8 +8,18 @@ const HomeScreen = () => {
   //const { theme, updateContext } = useContext(ThemeContext)
  
   return (
-    <div className="HomeScreen">
-      <MapComponent/>
+    <div className="HomeScreen ">
+    <h2>Welcome</h2>
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+            <p>kdjw`of+ wojp wedkv s</p>
+          </div>
+          <div className='col'>
+            <MapComponent />
+          </div>
+        </div>
+      </div>
       <div className="bg-dark p-5">
         <h1 className="display-4">Hello, world!</h1>
         <div class="row">

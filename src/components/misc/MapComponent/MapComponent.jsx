@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { createRoot } from 'react-dom/client';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import mapboxgl from 'mapbox-gl';
 import Popup from "../../journeys/Popup";
 import "./MapComponent.scss";
-import SearchBar from "../SearchBar.jsx/SearchBar";
 import fetchJourneyData from "../../../data/journeys";
 
 
@@ -13,7 +13,7 @@ mapboxgl.accessToken=
 function MapComponent() {
 
   const mapContainerRef = useRef(null);
-  const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
+  const popUpRef = useRef(new mapboxgl.Popup({ offset: 9 }));
  
   // initialize map when component mounts
   useEffect(() => {
@@ -91,13 +91,43 @@ function MapComponent() {
       }
     });
 
+      ////////////////////////////////////////////////////////
+
+      const geocoder = new MapboxGeocoder({
+        // Initialize the geocoder
+        accessToken: mapboxgl.accessToken, // Set the access token
+        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+        marker: false, // Do not use the default marker style
+        placeholder: 'Search for places in Madrid', // Placeholder text for the search bar
+        bbox: [-4.118500,40.272136,-3.251267,40.574271], // Boundary for Madrid [lng, lat]
+        proximity: {
+          longitude: -3.684883,
+          latitude: 40.423374
+        } 
+      });
+         
+        // Add the geocoder to the map
+        map.addControl(geocoder);
+    // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
+
+    geocoder.on('result', (event) => {
+      console.log(geocoder);
+      map.getSource('single-point').setData(event.result.geometry);
+    });
+
+
+    //////////////////////////////////////////////////////7
+
+
+
+
     // clean up on unmount
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
   <div className="map-container" ref={mapContainerRef} >
-    <SearchBar/>
+ 
   </div>
   
   );
