@@ -1,19 +1,19 @@
 import React from "react";
-import {  Link, NavLink } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import moment from 'moment'; 
 
-function Card({origin, destination, price, departureTime, creator, date,id}){
+function Card({origin, destination, price, departureTime, creator, date,id, vehicle}){
  
   return(
     <div className="card">
       <div className="card-body row">
-        <div className="col">
-          <h5 className="card-title"><strong>{origin.street}</strong></h5>
-          <h5 className="card-title"><strong>{destination.street}</strong></h5>
+        <div className="col-6">
+          <h6 className="card-title"><strong>From: {origin.street}</strong></h6>
+          <h6 className="card-title"><strong>To: {destination.street}</strong></h6>
         </div>
-        <div className="col">
-          <h4><strong>{moment(date).format('MM/DD/YYYY')}</strong></h4>
-          <p className="card-text">{price} €</p>
+        <div className="col-6">
+          <h6><strong>Date: {moment(date).format('MM/DD/YYYY')} - Departure time: {departureTime}</strong></h6>
+          <p className="card-text">Price: {price} € <strong>Seats left: {vehicle.seats}</strong></p>
         </div>
       </div>
       <Link key={id} className="" to={`/journeys/${id}`}>Go to detail</Link>

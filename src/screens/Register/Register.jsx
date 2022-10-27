@@ -69,7 +69,7 @@ function Register() {
           type="email"
           name="email"
           id="email"
-          value={values.email}
+          value={values.email.toLowerCase()}
           onChange={handleChange}
           error={errors.email}
           onBlur={handleBlur}

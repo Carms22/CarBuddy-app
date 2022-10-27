@@ -31,3 +31,4 @@ function SearchBar({handleSearchBar, name, placeholder}) {
 }
 
 export default SearchBar;
+

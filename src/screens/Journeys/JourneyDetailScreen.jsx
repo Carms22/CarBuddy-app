@@ -3,7 +3,7 @@ import {  useNavigate, useParams } from "react-router-dom";
 import moment from 'moment'; 
 import { getJourneyDetail, postComment, postScore } from "../../services/JourneyService";
 import AuthContext from "../../contexts/AuthContext"
-import { postBooking } from "../../services/BookingService";
+import { getBookingsJourney, postBooking } from "../../services/BookingService";
 
 function JourneyDetailScreen() {
   const {id}= useParams();
@@ -11,6 +11,7 @@ function JourneyDetailScreen() {
   const [journey, setJourney] = useState();
   const [comment, setComment] = useState({content: ""});
   const [score, setScore] = useState();
+  const [bookings, setBooking] =  useState([])
   const navigate = useNavigate();
 
   const onSubmit = (event) => {
@@ -28,7 +29,6 @@ function JourneyDetailScreen() {
   const handleOnChange = (event) => {
     const {name, value} = event.target;
     setComment( {...comment, [name]: value})
-      .then( comment => comment)
   }
 
   const handleOnclick =() =>{
@@ -42,9 +42,7 @@ function JourneyDetailScreen() {
     setScore(value)
   }
 
-  console.log(" clg fuera de todo imp body",score);
-
-  const onSubmitScore = (event) => {
+   const onSubmitScore = (event) => {
     event.preventDefault()
     console.log('score', score);
       postScore(id, {points: score})
@@ -60,6 +58,15 @@ function JourneyDetailScreen() {
       })
       .catch(err => console.log(err))
   },[id,comment])
+
+  useEffect(() =>{
+    getBookingsJourney()
+      .then(bookings => {
+        setBooking(bookings)
+        console.log(bookings);
+      })
+      .catch(err => console.log(err))
+  },[])
  
   
   return (
@@ -113,8 +120,10 @@ function JourneyDetailScreen() {
           </form>
         </div>
       }
-      { user ? //user === booking.user // mejor en otro sitio??
-          <div className="col-6">
+      {/*  */}
+      { bookings.map(booking => 
+        user.id===booking.user.id && !booking.isValidated ? 
+          <div className="col-6" key={booking.id}>
             <form className="container row" onSubmit={onSubmitScore}>
               <label className="">Evaluate the journey</label>
               <select    
@@ -136,7 +145,9 @@ function JourneyDetailScreen() {
           </div>
           :
           <div></div>
-        }
+      )
+
+      }
      </div>
     </div> 
 
