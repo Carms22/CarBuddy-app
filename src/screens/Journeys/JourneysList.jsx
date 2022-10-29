@@ -16,7 +16,7 @@ function JourneysList (){
   const onSubmit =(event) => {
     event.preventDefault()
     console.log("estoy en el onSubmit");
-    postLatLong(data)
+    postLatLong({searchPoint: data})
   }
   console.log(data);
 
