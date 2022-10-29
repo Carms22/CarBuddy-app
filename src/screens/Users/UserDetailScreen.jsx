@@ -1,8 +1,9 @@
 import {logout} from '../../store/AccessTokenStore'
 import { getBookings } from '../../services/BookingService';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import "./UserDetailScreen.scss"
+import { Link } from 'react-router-dom';
 
 
 function UserDetailScreen() {
@@ -14,13 +15,18 @@ function UserDetailScreen() {
       .then(result => console.log("you just logout"))
   }
 
-  useEffect( ()=> {
+  const getBookingsCallBack = useCallback(() =>{
     getBookings()
       .then( bookings => setBooking(bookings))
       .catch(err => console.log(err))
   },[])
 
- console.log("entro");
+  useEffect( ()=> {
+    getBookingsCallBack()
+  },[getBookingsCallBack])
+
+
+ console.log("entro", bookings);
   return ( 
     <div className='container'>
       <div className='row'>
@@ -36,10 +42,12 @@ function UserDetailScreen() {
                 <h6>Departure time: {booking.journey.departureTime}</h6>
               </div>
               <div className='col-4'>
-                <h5>Driver buddy: {booking.journey.creator}</h5>
+                <h5>Driver buddy: {booking.journey.creator} <img className='img-user' src={booking.journey.creator} alt='buddy'/></h5>
                 <h6>Price: {booking.journey.price} €</h6>
                 <h6>Seats left: {booking.journey.vehicle.seats}</h6>
               </div>
+             
+              <Link key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>Go to detail</Link>
             </div>
           </div>
         )}

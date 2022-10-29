@@ -22,7 +22,7 @@ function Register() {
     validateOnChange: false,
   })
 
-  /// email toLoweCase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+  
   const navigate = useNavigate();
 
   function onSubmit(values) { 
@@ -33,8 +33,6 @@ function Register() {
         } })
       })
       .catch(err => {
-        console.log(err.response.data)
-
         err.response.data &&
           Object.keys(err.response.data.errors)
             .forEach((errorKey) => {

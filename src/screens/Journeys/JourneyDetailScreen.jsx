@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import moment from 'moment'; 
 import { getJourneyDetail, postComment, postScore } from "../../services/JourneyService";
@@ -43,11 +43,13 @@ function JourneyDetailScreen() {
   }
 
    const onSubmitScore = (event) => {
+    const bookingId = event.target[0].value;
     event.preventDefault()
-    console.log('score', score);
-      postScore(id, {points: score})
+      
+    postScore(bookingId, {points: score})
         .then(score => {
           console.log('onSubmit' , score);
+          getBookings()
         })
   }
 
@@ -59,14 +61,17 @@ function JourneyDetailScreen() {
       .catch(err => console.log(err))
   },[id,comment])
 
-  useEffect(() =>{
+  const getBookings = useCallback(() => {
     getBookingsJourney()
       .then(bookings => {
         setBooking(bookings)
-        console.log(bookings);
       })
       .catch(err => console.log(err))
-  },[])
+  }, [])
+
+  useEffect(() =>{
+    getBookings()
+  }, [getBookings])
  
   
   return (
@@ -125,6 +130,7 @@ function JourneyDetailScreen() {
         user.id===booking.user.id && !booking.isValidated ? 
           <div className="col-6" key={booking.id}>
             <form className="container row" onSubmit={onSubmitScore}>
+              <input type="hidden" name="bookingId" value={booking.id}/>
               <label className="">Evaluate the journey</label>
               <select    
                 type="number"

@@ -13,22 +13,25 @@ mapboxgl.accessToken=
 function MapComponent() {
 
   const mapContainerRef = useRef(null);
-  const popUpRef = useRef(new mapboxgl.Popup({ offset: 9 }));
+  const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
  
   // initialize map when component mounts
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       // See style options here: https://docs.mapbox.com/api/maps/#styles
+      //mapbox://styles/mapbox/outdoors-v11
       style: "mapbox://styles/mapbox/dark-v10",
       center: [-3.7035825, 40.4167047],
-      zoom: 12
+      zoom: 12,
+      //preserveDrawingBuffer: true
     });
 
     // add navigation control (zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
     
     map.on("load", () => {
+      
       // add the data source for new a feature collection with no features
       map.addSource("random-points-data", {
         type: "geojson",
@@ -46,6 +49,7 @@ function MapComponent() {
           // full list of icons here: https://labs.mapbox.com/maki-icons
           "icon-image": "car-15", // this will put little croissants on our map
           "icon-padding": 0,
+          "icon-size": 1.2,
           "icon-allow-overlap": true
         }
       });
@@ -91,7 +95,6 @@ function MapComponent() {
       }
     });
 
-      ////////////////////////////////////////////////////////
 
       const geocoder = new MapboxGeocoder({
         // Initialize the geocoder
@@ -114,11 +117,6 @@ function MapComponent() {
       console.log(geocoder);
       map.getSource('single-point').setData(event.result.geometry);
     });
-
-
-    //////////////////////////////////////////////////////7
-
-
 
 
     // clean up on unmount
