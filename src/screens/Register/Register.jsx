@@ -7,13 +7,15 @@ import RegisterSchema from './RegisterSchema'
 const INITIAL_VALUES = {
   name: '',
   email: '',
-  password: ''
+  password: '',
+  image: ''
 }
 
 function Register() {
+  const navigate = useNavigate();
   const {
     values, handleChange, handleBlur, handleSubmit, errors,
-    isSubmitting, setSubmitting, setFieldError
+    isSubmitting, setSubmitting, setFieldError, setFieldValue
   } = useFormik({
     initialValues: INITIAL_VALUES,
     onSubmit: onSubmit,
@@ -22,11 +24,14 @@ function Register() {
     validateOnChange: false,
   })
 
-  
-  const navigate = useNavigate();
 
   function onSubmit(values) { 
-    createUser(values)
+    const formData = new FormData()
+
+    for (let value in values) {
+      formData.append(value, values[value])
+    }
+    createUser(formData)
       .then(user => {
         navigate('/login', { state: {
           email: values.email
@@ -82,6 +87,17 @@ function Register() {
           value={values.password}
           onChange={handleChange}
           error={errors.password}
+          onBlur={handleBlur}
+        />
+
+        <Input
+          label="File"
+          placeholder="Add file"
+          type="file"
+          name="image"
+          id="file"
+          onChange={(e) => setFieldValue('image', e.target.files[0])}
+          error={errors.image}
           onBlur={handleBlur}
         />
 

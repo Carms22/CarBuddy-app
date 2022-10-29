@@ -1,9 +1,10 @@
 .map-container {
-  height: 40vh;
+  max-height: 90vh;
   
 }
-
 .mapboxgl-canvas {
-  max-height:  40vw;
+  max-height:  90vw;
 
 }
+
+// mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate

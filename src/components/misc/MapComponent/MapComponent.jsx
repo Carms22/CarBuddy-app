@@ -23,7 +23,7 @@ function MapComponent() {
       //mapbox://styles/mapbox/outdoors-v11
       style: "mapbox://styles/mapbox/dark-v10",
       center: [-3.7035825, 40.4167047],
-      zoom: 12,
+      zoom: 9,
       //preserveDrawingBuffer: true
     });
 

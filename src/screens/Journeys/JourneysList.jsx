@@ -34,7 +34,7 @@ function JourneysList (){
           <SearchBar 
             name="destination"
             handleSearchBar={handleSearchBar}
-            placeholder="Destination of the journey"
+            placeholder="Filter by destination of the journey"
           />
           <button type="submit">Search</button>
         </form>
