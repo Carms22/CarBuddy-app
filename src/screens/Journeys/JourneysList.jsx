@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "../../components/journeys/Card";
 import SearchBar from "../../components/misc/SearchBar.jsx/SearchBar";
 import {getJourneys} from '../../services/JourneyService'
-import {postLatLong} from '../../services/MiscService'
+import {getJourneysFromSearch} from '../../services/MiscService'
 
 function JourneysList (){
   const [journeys, setJourneys] = useState([]);
@@ -10,15 +10,13 @@ function JourneysList (){
   
   
   const handleSearchBar = (lat, long) => {
-    console.log("estoy en el handlesearch bar... lat:", lat);
     setData([long, lat])
   }
   const onSubmit =(event) => {
     event.preventDefault()
-    console.log("estoy en el onSubmit");
-    postLatLong({searchPoint: data})
+    getJourneysFromSearch(data)
+      .then(journeysFetched => setJourneys(journeysFetched))
   }
-  console.log(data);
 
   useEffect( ()=> {
     getJourneys()
@@ -27,6 +25,7 @@ function JourneysList (){
       })
       .catch(err => console.log(err))
   },[])
+
 
   return(
     <div>
@@ -39,9 +38,17 @@ function JourneysList (){
           />
           <button type="submit">Search</button>
         </form>
-        {journeys.map( journey => (
-          <Card {...journey} key={journey.id}/>
-        ))}
+        <div>
+          { journeys?
+            journeys.map( journey => (
+            <Card {...journey} key={journey.id}/>
+          ))
+          :
+          <p>No journey this time</p>
+          }
+          
+        </div>
+        
     </div>
   )
 }

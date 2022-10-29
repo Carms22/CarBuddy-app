@@ -2,5 +2,6 @@ import createHttp from "./BaseService";
 
 const http = createHttp(false);
 
-export const postLatLong = (data) => 
-  http.post("/searchs",  data).then( res => res);
+export const getJourneysFromSearch = (data) => 
+  http.get("/searchs",  {params: {lng: data[0], lat: data[1]}}).then( res => res);
+
