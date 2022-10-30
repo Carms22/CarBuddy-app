@@ -20,8 +20,8 @@ function MapComponent() {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       // See style options here: https://docs.mapbox.com/api/maps/#styles
-      //mapbox://styles/mapbox/outdoors-v11
-      style: "mapbox://styles/mapbox/dark-v10",
+      //"mapbox://styles/mapbox/dark-v10"
+      style: "mapbox://styles/mapbox/outdoors-v11",
       center: [-3.7035825, 40.4167047],
       zoom: 9,
       //preserveDrawingBuffer: true
@@ -96,21 +96,21 @@ function MapComponent() {
     });
 
 
-      const geocoder = new MapboxGeocoder({
-        // Initialize the geocoder
-        accessToken: mapboxgl.accessToken, // Set the access token
-        mapboxgl: mapboxgl, // Set the mapbox-gl instance
-        marker: false, // Do not use the default marker style
-        placeholder: 'Search for places in Madrid', // Placeholder text for the search bar
-        bbox: [-4.118500,40.272136,-3.251267,40.574271], // Boundary for Madrid [lng, lat]
-        proximity: {
-          longitude: -3.684883,
-          latitude: 40.423374
-        } 
-      });
-         
-        // Add the geocoder to the map
-        map.addControl(geocoder);
+    const geocoder = new MapboxGeocoder({
+      // Initialize the geocoder
+      accessToken: mapboxgl.accessToken, // Set the access token
+      mapboxgl: mapboxgl, // Set the mapbox-gl instance
+      marker: false, // Do not use the default marker style
+      placeholder: 'Search for places in Madrid', // Placeholder text for the search bar
+      bbox: [-4.118500,40.272136,-3.251267,40.574271], // Boundary for Madrid [lng, lat]
+      proximity: {
+        longitude: -3.684883,
+        latitude: 40.423374
+      } 
+    });
+        
+      // Add the geocoder to the map
+      map.addControl(geocoder);
     // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
 
     geocoder.on('result', (event) => {

@@ -1,13 +1,16 @@
 body {
+  background: url('../public/img/green-water.jpg');
+  height: 100%;
+  width: 100%;
+  background-position: center 100%;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

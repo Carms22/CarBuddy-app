@@ -23,9 +23,8 @@ function JourneysList (){
       .then( journeys => {
         setJourneys(journeys)
       })
-      .catch(err => console.log(err))
+      .catch(err => err)
   },[])
-
 
   return(
     <div>
@@ -38,7 +37,7 @@ function JourneysList (){
           />
           <button type="submit">Search</button>
         </form>
-        <div>
+        <div className="container">
           { journeys?
             journeys.map( journey => (
             <Card {...journey} key={journey.id}/>

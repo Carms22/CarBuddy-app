@@ -89,6 +89,7 @@ function JourneyDetailScreen() {
           <div className="col-6">
             <h3><strong>{journey.vehicle.typeOf}</strong></h3>
             <h3>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h3>
+            <h3>Rating: {journey.score.points}</h3>
 
             <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button>
             
@@ -154,6 +155,7 @@ function JourneyDetailScreen() {
       )
 
       }
+     
      </div>
     </div> 
 

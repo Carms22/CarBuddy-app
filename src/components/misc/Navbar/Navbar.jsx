@@ -4,7 +4,7 @@ import './Navbar.scss'
 
 function Navbar(){
   return(
-    <nav className={` Navbar navbar navbar-expand-lg main-nav`}>
+    <nav className= "Navbar navbar navbar-expand-lg main-nav">
     <div className="container">
       <Link className="navbar-brand" to="/">CarBuddy</Link> {/* Este Link viene de react-router-dom y nos permite navegar entre las distintas rutas con la prop to="ruta" EX. to="/users" */}
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
