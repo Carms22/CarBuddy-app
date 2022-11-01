@@ -1,0 +1,34 @@
+.map-container {
+  height: 50vh;
+}
+
+.mapboxgl-map {
+  font: 9px/13px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  position: relative;
+  -webkit-tap-highlight-color: rgba(13, 21, 69, 0);
+}
+.mapboxgl-ctrl-top-right {
+  width: 90%;
+  &.mapboxgl-ctrl-geocoder{
+    width: 90%;
+  }
+}
+
+.mapboxgl-ctrl-icon {
+  padding: 15px 15px 15px 19px;
+
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon{
+  background-image: url('../../../../public/img/mapbox/mapboxgl-ctrl-zoom-out.svg')
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon{
+  background-image: url('../../../../public/img/mapbox/mapboxgl-ctrl-zoom-in.svg')
+}
+.mapboxgl-ctrl button.mapboxgl-ctrl-compass .mapboxgl-ctrl-icon{
+  background-image: url('../../../../public/img/mapbox/mapboxgl-ctrl-compass.svg')
+}
+
+// mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate

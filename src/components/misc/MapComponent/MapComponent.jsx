@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import mapboxgl from 'mapbox-gl';
 import Popup from "../../journeys/Popup";
-import "./MapComponent.scss";
+import "../../../styles/partials/components/MapComponent.scss";
 import fetchJourneyData from "../../../data/journeys";
 
 

@@ -1,0 +1,51 @@
+@mixin img-fit {
+
+  object-fit: cover;
+}
+
+@mixin bg-cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@mixin flexbox($justifyContent: flex-start, $alignItems: flex-start) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+// mixin for media-queries
+
+@mixin devices($breakpoint) {
+
+  @if $breakpoint==xl {
+      @media (max-width: 1399.98px) {
+          @content;
+      }
+  }
+
+  @else if $breakpoint==lg {
+      @media (max-width: 1023.98px) {
+          @content;
+      }
+  }
+
+  @else if $breakpoint==md {
+      @media (max-width: 767.98px) {
+          @content;
+      }
+  }
+
+  @else if $breakpoint==sm {
+      @media (max-width: 639.98px) {
+          @content;
+      }
+  }
+
+  @else if $breakpoint==xs {
+      @media (max-width: 479.98px) {
+          @content;
+      }
+  }
+}

@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/styles.scss';
 import {Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/Home/HomeScreen';
 import Navbar from './components/misc/Navbar/Navbar';
