@@ -10,12 +10,13 @@ const fetchJourneyData = () => {
           type: "Feature",
           geometry: {
             type: "Point",
-            coordinates: journey.origin.location
+            coordinates: journey.destination.location
           },
           properties: {
             id: journey.id,
             origin: journey.origin.street,
             destination: journey.destination.street,
+            departureTime: journey.departureTime
           }
         })
       ))

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {  Link } from 'react-router-dom';
 import moment from 'moment'; 
-import './Card.scss'
+import '../../styles/partials/components/Card.scss'
 
 function Card({origin, destination, price, departureTime, creator, date,id, vehicle, score}){
   const [totalPoints, setTotalPoints] = useState()
@@ -11,7 +11,7 @@ function Card({origin, destination, price, departureTime, creator, date,id, vehi
     if(score){
       score.map(element => {
         console.log("element on map", element);
-        setTotalPoints(totalPoints + element.points)
+        return setTotalPoints(totalPoints + element.points)
       })
 
     }
