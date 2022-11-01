@@ -1,7 +1,19 @@
-.Card{
-  text-decoration: none;
+@import '../base/variables';
+
+.card{
+  border: 1px solid $primary;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  text-decoration:wavy;
+  color: $primary;
+
   &:hover {
-    color: hotpink;
+    color: rgb(137, 58, 202);
   }
+}
+a:-webkit-any-link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
 }
 

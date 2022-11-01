@@ -3,6 +3,7 @@ import Card from "../../components/journeys/Card";
 import SearchBar from "../../components/misc/SearchBar.jsx/SearchBar";
 import {getJourneys} from '../../services/JourneyService'
 import {getJourneysFromSearch} from '../../services/MiscService'
+import '../../styles/partials/components/Card.scss'
 
 function JourneysList (){
   const [journeys, setJourneys] = useState([]);
@@ -40,7 +41,7 @@ function JourneysList (){
         <div className="container">
           { journeys?
             journeys.map( journey => (
-            <Card {...journey} key={journey.id}/>
+            <Card {...journey} key={journey.id} className='Card'/>
           ))
           :
           <p>No journey this time</p>

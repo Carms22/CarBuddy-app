@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/misc/ProtectedRoute";
 import UnprotectedRoute from "./components/misc/UnprotectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
 import JourneyDetailScreen from './screens/Journeys/JourneyDetailScreen';
+import ErrorScreen from '../src/screens/Error/ErrorScreen';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<ErrorScreen/>} />
       </Routes>
       ) : (
         <p>Loading...</p>
