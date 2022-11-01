@@ -6,14 +6,12 @@
   border-radius: 10px;
   text-decoration:wavy;
   color: $primary;
+  
 
   &:hover {
     color: rgb(137, 58, 202);
   }
+
 }
-a:-webkit-any-link {
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-}
+
 
