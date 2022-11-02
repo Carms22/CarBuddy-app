@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import moment from 'moment'; 
-import { getJourneyDetail, postComment, postScore } from "../../services/JourneyService";
+import { getJourneyDetail, getScore, postComment, postScore } from "../../services/JourneyService";
 import AuthContext from "../../contexts/AuthContext"
 import { getBookingsJourney, postBooking } from "../../services/BookingService";
 
@@ -12,7 +12,10 @@ function JourneyDetailScreen() {
   const [comment, setComment] = useState({content: ""});
   const [score, setScore] = useState();
   const [bookings, setBooking] =  useState([])
+  const [points, setPoints] = useState()
   const navigate = useNavigate();
+
+  console.log(bookings);
 
   const onSubmit = (event) => {
     event.preventDefault()
@@ -33,8 +36,7 @@ function JourneyDetailScreen() {
 
   const handleOnclick =() =>{
     postBooking(id)
-      .then(booking => booking)  
-    navigate("/profile")      
+      .then(booking => navigate("/profile") )  
   }
   
   const handleOnChangeScore = (event) => {
@@ -49,7 +51,8 @@ function JourneyDetailScreen() {
     postScore(bookingId, {points: score})
         .then(score => {
           console.log('onSubmit' , score);
-          getBookings()
+          //getBookings()
+          getScore(id).then(points => setPoints(points))
         })
   }
 
@@ -62,7 +65,7 @@ function JourneyDetailScreen() {
   },[id,comment])
 
   const getBookings = useCallback(() => {
-    getBookingsJourney()
+    getBookingsJourney(id)
       .then(bookings => {
         setBooking(bookings)
       })
@@ -71,8 +74,10 @@ function JourneyDetailScreen() {
 
   useEffect(() =>{
     getBookings()
-  }, [getBookings])
- 
+    getScore(id).then(points => setPoints(points))
+  }, [id,getBookings,points])
+
+  console.log(points);
   
   return (
     <div className="container">
@@ -82,21 +87,21 @@ function JourneyDetailScreen() {
         <div className="row">
           <div className="col-6">
             <h2><strong>{moment(journey.date).format('MM/DD/YYYY')}</strong></h2>
-            <h4><strong><span>Hour: {journey.departureTime}</span><span>{journey.origin.street}</span></strong></h4>
-            <h4><strong><span>Return hour:{journey.returnTime}</span><span>{journey.destination.street}</span></strong></h4>
+            <h4><strong><span>Departure time: {journey.departureTime} / </span><span> From: {journey.origin.street}</span></strong></h4>
+            <h4><strong><span>Return hour:{journey.returnTime} / </span><span> To: {journey.destination.street}</span></strong></h4>
           </div> 
     
           <div className="col-6">
             <h3><strong>{journey.vehicle.typeOf}</strong></h3>
             <h3>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h3>
-            <h3>Rating: {journey.score.points}</h3>
+            <h3>Rating: {points}</h3>
 
             <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button>
             
           </div>
           <div className="container">
             <div className="row">
-              { journey.comments? journey.comments.map( (comment) => 
+              { journey.comments ? journey.comments.map( (comment) => 
                 <div  className="col-4" key={comment.id}>
                   <h4>{comment.commentCreator.name}</h4>
                   <p>{comment.content}</p>
@@ -126,7 +131,8 @@ function JourneyDetailScreen() {
           </form>
         </div>
       }
-      {/*  */}
+
+      {/* Form to score journey */}
       { bookings.map(booking => 
         user.id===booking.user.id && !booking.isValidated ? 
           <div className="col-6" key={booking.id}>

@@ -26,7 +26,7 @@ function UserDetailScreen() {
   },[getBookingsCallBack])
 
 
- console.log("entro", bookings);
+ console.log("entro", user);
   return ( 
     <div className='container'>
       <div className='row'>
@@ -39,10 +39,10 @@ function UserDetailScreen() {
               <div className='col-8'>
                 <h5>From: {booking.journey.origin.street}</h5>
                 <h5>To: {booking.journey.destination.street}</h5>
-                <h6>Departure time: {booking.journey.departureTime}</h6>
+                <h6>Departure time: {booking.journey.departureTime.toString()}</h6>
               </div>
               <div className='col-4'>
-                <h5>Driver buddy: {booking.journey.creator} <img className='img-user' src={booking.journey.creator} alt='buddy'/></h5>
+                <h5>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h5>
                 <h6>Price: {booking.journey.price} €</h6>
                 <h6>Seats left: {booking.journey.vehicle.seats}</h6>
               </div>
