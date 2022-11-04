@@ -17,3 +17,6 @@ export const getDetail = (id) =>
 
 // export const deleteUser = (id) =>
 //   http.post(`/users/${id}/delete`).then((res) => res);""
+
+export const getCreator = (id) => 
+  http.get(`/creators/${id}`).then((res) => res);

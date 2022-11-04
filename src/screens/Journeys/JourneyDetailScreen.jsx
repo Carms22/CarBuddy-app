@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  Link, useNavigate, useParams } from "react-router-dom";
 import moment from 'moment'; 
 import { getJourneyDetail, getScore, postComment, postScore } from "../../services/JourneyService";
 import AuthContext from "../../contexts/AuthContext"
@@ -17,6 +17,7 @@ function JourneyDetailScreen() {
 
   console.log(bookings);
 
+  //Comments submit
   const onSubmit = (event) => {
     event.preventDefault()
     if(comment){
@@ -34,28 +35,29 @@ function JourneyDetailScreen() {
     setComment( {...comment, [name]: value})
   }
 
+  //Booking and score booking
   const handleOnclick =() =>{
     postBooking(id)
       .then(booking => navigate("/profile") )  
   }
-  
   const handleOnChangeScore = (event) => {
     const { value } = event.target;
     setScore(value)
   }
-
-   const onSubmitScore = (event) => {
+  const onSubmitScore = (event) => {
     const bookingId = event.target[0].value;
     event.preventDefault()
       
     postScore(bookingId, {points: score})
         .then(score => {
           console.log('onSubmit' , score);
-          //getBookings()
-          getScore(id).then(points => setPoints(points))
+          getBookings()
+          getScoreFunction()
         })
   }
 
+
+  //Journey details
   useEffect(() =>{
     getJourneyDetail(id)
       .then( journey => {
@@ -64,41 +66,53 @@ function JourneyDetailScreen() {
       .catch(err => console.log(err))
   },[id,comment])
 
+  //bookings of the journey
   const getBookings = useCallback(() => {
     getBookingsJourney(id)
       .then(bookings => {
         setBooking(bookings)
       })
       .catch(err => console.log(err))
-  }, [])
+  }, [id])
+
+  const getScoreFunction = useCallback(() => {
+    getScore(id)
+      .then(points => setPoints(points))
+      .catch(err => console.log(err))
+  }, [id])
 
   useEffect(() =>{
     getBookings()
-    getScore(id).then(points => setPoints(points))
-  }, [id,getBookings,points])
+    getScoreFunction()
+  }, [getBookings, getScoreFunction])
 
   console.log(points);
-  
+    
   return (
     <div className="container">
       Detail
       { !journey ? "Loaiding" 
         :
         <div className="row">
-          <div className="col-6">
+          <div className="col-4">
             <h2><strong>{moment(journey.date).format('MM/DD/YYYY')}</strong></h2>
             <h4><strong><span>Departure time: {journey.departureTime} / </span><span> From: {journey.origin.street}</span></strong></h4>
             <h4><strong><span>Return hour:{journey.returnTime} / </span><span> To: {journey.destination.street}</span></strong></h4>
           </div> 
     
-          <div className="col-6">
+          <div className="col-4">
             <h3><strong>{journey.vehicle.typeOf}</strong></h3>
             <h3>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h3>
             <h3>Rating: {points}</h3>
 
-            <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button>
-            
+            <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
           </div>
+          <div  className="col-4">
+            <h6>Buddy: {journey.creator.name}</h6>
+            <h6>Buddy: {journey.creator.image}</h6>
+            <Link to={`/creators/${id}`}>Detail</Link>
+          </div>
+ 
           <div className="container">
             <div className="row">
               { journey.comments ? journey.comments.map( (comment) => 
@@ -114,7 +128,8 @@ function JourneyDetailScreen() {
           </div>
         </div>
       }
-     
+      
+      {/* Comment create*/}
       <div className="container row">
       { user &&
        <div className="mb-4 col-6">

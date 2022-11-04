@@ -12,6 +12,7 @@ import UnprotectedRoute from "./components/misc/UnprotectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
 import JourneyDetailScreen from './screens/Journeys/JourneyDetailScreen';
 import ErrorScreen from '../src/screens/Error/ErrorScreen';
+import CreatorScreenDetail from './screens/Creator/CreatorScreenDetail';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomeScreen/>}/>
         <Route path='/journeys' element={<JourneysList/>}/>
+        <Route path='/creators/:id' element={<CreatorScreenDetail/>}/>
         <Route path='/journeys/:id' element={<JourneyDetailScreen/>}/>
         <Route path='/journeys/create' element={<JourneyFormScreen/>}/>
         <Route path='/register' element={<Register/>}/>
