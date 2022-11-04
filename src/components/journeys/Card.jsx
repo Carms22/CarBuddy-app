@@ -5,9 +5,7 @@ import '../../styles/partials/components/Card.scss'
 
 function Card({origin, destination, price, departureTime, creator, date,id, vehicle, score}){
   const [totalPoints, setTotalPoints] = useState()
-  console.log("en Card fuera de todo ", score[0]);
   function calculateTotal(score) {
-    console.log("score", score);
     if(score){
       score.map(element => {
         console.log("element on map", element);

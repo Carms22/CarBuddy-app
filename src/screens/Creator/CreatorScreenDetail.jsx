@@ -16,6 +16,7 @@ function CreatorScreenDetail() {
         setCreator(creator)
       })
   },[id])
+  
   useEffect(() => {
     getListByCreator(id)
       .then( journeys => {
@@ -26,8 +27,9 @@ function CreatorScreenDetail() {
   
   return ( 
     <div>
-      detail
-      <h4>Name: {creator.name}<img src={creator.image} alt="creator-img"/></h4>
+      { creator &&
+        <h4>Name: {creator.name}<img src={creator.image} alt="creator-img"/></h4>
+      }
       { journeysByCreator ? journeysByCreator.map( journey => 
         <Card {...journey} key={journey.id} />
       )

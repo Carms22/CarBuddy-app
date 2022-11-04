@@ -7,11 +7,15 @@ export const getJourneys = () =>
 
 export const getJourneyDetail = (id) => 
   http.get(`/journeys/${id}`).then( res => res);
+
 export const getListByCreator = (id) => 
   http.get(`/journeys/${id}/creator`).then( res => res);
 
 export const postJourney = (body) => 
   http.post("/journeys", body).then( res => res);
+
+export const deleteJourney = (id) => 
+  http.delete(`/journeys/${id}`).then( res => res);
 
 export const postComment = (id,body) => 
   http.post(`/comments/${id}`, body).then( res => res);
