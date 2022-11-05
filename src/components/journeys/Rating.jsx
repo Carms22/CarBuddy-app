@@ -1,6 +1,7 @@
 import React from "react";
 
 const Rating = (props) => {
+  console.log(props.children);
   const starts = Math.ceil(props.children);
   const numberStarts = () =>{
     switch (starts) {
@@ -22,7 +23,7 @@ const Rating = (props) => {
   }
   return (
     <div>
-      <h2> {numberStarts}</h2>
+      <h4> {numberStarts()}</h4>
     </div>
   )
 }
