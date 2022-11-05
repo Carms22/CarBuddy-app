@@ -35,6 +35,7 @@ function UserDetailScreen() {
   };
   //Edit --go to form
   function handleUpdate(id){
+    console.log("handleUpdate", id);
     navigate(`/journeys/${id}/edit`)
   };
 

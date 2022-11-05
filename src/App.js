@@ -26,10 +26,10 @@ function App() {
         <Route path='/journeys' element={<JourneysList/>}/>
         <Route path='/creators/:id' element={<CreatorScreenDetail/>}/>
         <Route path='/journeys/:id' element={<JourneyDetailScreen/>}/>
-        {/* edit */}
+        
         <Route path='/journeys/create' element={<JourneyFormScreen/>}/>
         <Route path='/journeys/:id/edit' element={<JourneyFormScreen/>}/>
-        {/*  */}
+
         <Route path='/register' element={<Register/>}/>
         <Route 
           path='/login' 
