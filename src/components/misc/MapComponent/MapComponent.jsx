@@ -20,11 +20,9 @@ function MapComponent() {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       // See style options here: https://docs.mapbox.com/api/maps/#styles
-      //"mapbox://styles/mapbox/dark-v10"
       style: "mapbox://styles/mapbox/outdoors-v11",
       center: [-3.7035825, 40.4167047],
       zoom: 9,
-      //preserveDrawingBuffer: true
     });
 
     // add navigation control (zoom buttons)
@@ -33,7 +31,7 @@ function MapComponent() {
     map.on("load", () => {
       
       // add the data source for new a feature collection with no features
-      map.addSource("random-points-data", {
+      map.addSource("points-data", {
         type: "geojson",
         data: {
           type: "FeatureCollection",
@@ -42,12 +40,12 @@ function MapComponent() {
       });
       // now add the layer, and reference the data source above by name
       map.addLayer({
-        id: "random-points-layer",
-        source: "random-points-data",
+        id: "points-layer",
+        source: "points-data",
         type: "symbol",
         layout: {
           // full list of icons here: https://labs.mapbox.com/maki-icons
-          "icon-image": "car-15", // this will put little croissants on our map
+          "icon-image": "car-15", // this will put little cars on our map
           "icon-padding": 0,
           "icon-size": 1.2,
           "icon-allow-overlap": true
@@ -62,25 +60,24 @@ function MapComponent() {
       const results = await fetchJourneyData().then(results =>{
         return results
       })
-      // update "random-points-data" source with new data
-      // all layers that consume the "random-points-data" data source will be updated automatically
-      map.getSource("random-points-data").setData(results);
+      // all layers that consume the "points-data" data source will be updated automatically
+      map.getSource("points-data").setData(results);
     });
 
     // change cursor to pointer when user hovers over a clickable feature
-    map.on("mouseenter", "random-points-layer", e => {
+    map.on("mouseenter", "points-layer", e => {
       if (e.features.length) {
         map.getCanvas().style.cursor = "pointer";
       }
     });
 
     // reset cursor to default when user is no longer hovering over a clickable feature
-    map.on("mouseleave", "random-points-layer", () => {
+    map.on("mouseleave", "points-layer", () => {
       map.getCanvas().style.cursor = "";
     });
 
     // add popup when user clicks a point
-    map.on("click", "random-points-layer", e => {
+    map.on("click", "points-layer", e => {
       if (e.features.length) {
         const feature = e.features[0];
         // create popup node
@@ -101,7 +98,7 @@ function MapComponent() {
       accessToken: mapboxgl.accessToken, // Set the access token
       mapboxgl: mapboxgl, // Set the mapbox-gl instance
       marker: false, // Do not use the default marker style
-      placeholder: 'Search for places in Madrid', // Placeholder text for the search bar
+      placeholder: "Search for destination's journeys", // Placeholder text for the search bar
       bbox: [-4.118500,40.272136,-3.251267,40.574271], // Boundary for Madrid [lng, lat]
       proximity: {
         longitude: -3.684883,

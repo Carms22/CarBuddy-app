@@ -9,6 +9,8 @@ import Card from '../../components/journeys/Card';
 import { deleteJourney } from '../../services/JourneyService';
 import { calculateUserScore } from '../../helper/scoreHelper';
 import Rating from '../../components/journeys/Rating';
+import '../../styles/partials/components/Button.scss'
+import '../../styles/partials/components/Card.scss'
 
 
 
@@ -48,7 +50,6 @@ function UserDetailScreen() {
   const getJourneysOfCreator = useCallback(() => {
     getListYourJourneys()
       .then( journeys => {
-        console.log("journeys of creator", journeys);
         setJourneys(journeys)
       })
       .catch(err => console.log(err))
@@ -66,34 +67,39 @@ function UserDetailScreen() {
       })
   },[getJourneysOfCreator])
 
+  console.log(bookings);
+
   //PROFILE
   return ( 
     <div className='container'>
       <div className='row'>
         <h3 className='col-8'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h3>
-        <button className="col-2" onClick={handleLogout}>Logout</button>
+        <button className="button col-2" onClick={handleLogout}>Logout</button>
         <Rating className="text-center">{score}</Rating>
       </div>
 
       <h3>My booking: </h3>
       <div className='container'>
         {bookings && bookings.map(booking => 
-          <div className='card' key={booking.id}>
-            <div className='row card-body'>
-              <div className='col-8'>
-                <h5>From: {booking.journey.origin.street}</h5>
-                <h5>To: {booking.journey.destination.street}</h5>
-                <h6>Departure time: {booking.journey.departureTime.toString()}</h6>
+          <>
+          {console.log("booking.journey",booking.journey)}
+            <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
+              <div className='row card-body'>
+                <div className='col-8'>
+                  <h5>From: {booking.journey.origin.street}</h5>
+                  <h5>To: {booking.journey.destination.street}</h5>
+                  <h6>Departure time: {booking.journey.departureTime.toString()}</h6>
+                  
+                </div>
+                <div className='col-4'>
+                  <h5>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h5>
+                  <h6>Price: {booking.journey.price} €</h6>
+                  <h6>Seats left: {booking.journey.vehicle.seats}</h6>
+                  <Rating>{calculateUserScore(booking.journey.creator.score)}</Rating>
+                </div>
               </div>
-              <div className='col-4'>
-                <h5>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h5>
-                <h6>Price: {booking.journey.price} €</h6>
-                <h6>Seats left: {booking.journey.vehicle.seats}</h6>
-              </div>
-             
-              <Link key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>Go to detail</Link>
-            </div>
-          </div>
+            </Link>
+          </>
         )
       
         }
@@ -103,9 +109,11 @@ function UserDetailScreen() {
       <div className='container'>
         { journeysOfUser ? journeysOfUser.map( journey =>
           <div className=' row' key={journey.id}>
-            <Card className='col-8' {...journey} />
-            <button className='col-2' onClick={() => handleDlete(journey.id)}>Delete</button>
-            <button className='col-2' onClick={() => handleUpdate(journey.id)}>Edit</button>
+            <div className=' container'>
+              <Card className='col-8' {...journey} />
+              <button className='button col-2' onClick={() => handleDlete(journey.id)}>Delete</button>
+              <button className='button col-2' onClick={() => handleUpdate(journey.id)}>Edit</button>
+            </div>
           </div>
         )
         :

@@ -7,8 +7,6 @@ import Rating from "./Rating";
 
 function Card({origin, destination, price, departureTime, creator, date,id, vehicle, score}){
  
-  console.log("en card score",calculateUserScore(score) );
-
   return(
     <Link key={id} className="m-1" to={`/journeys/${id}`} >
       <div className="card">

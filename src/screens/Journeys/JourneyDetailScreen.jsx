@@ -4,6 +4,7 @@ import moment from 'moment';
 import { getJourneyDetail, getScore, postComment, postScore } from "../../services/JourneyService";
 import AuthContext from "../../contexts/AuthContext"
 import { getBookingsJourney, postBooking } from "../../services/BookingService";
+import { calculateUserScore } from "../../helper/scoreHelper";
 
 function JourneyDetailScreen() {
   const {id}= useParams();
@@ -14,8 +15,6 @@ function JourneyDetailScreen() {
   const [bookings, setBooking] =  useState([])
   const [points, setPoints] = useState()
   const navigate = useNavigate();
-
-  console.log(bookings);
 
   //Comments submit
   const onSubmit = (event) => {
@@ -77,7 +76,15 @@ function JourneyDetailScreen() {
 
   const getScoreFunction = useCallback(() => {
     getScore(id)
-      .then(points => setPoints(points))
+      .then(scores => {  
+        if(scores.length !== 0){
+          console.log("no debería entrar");
+          setPoints(calculateUserScore(scores))
+        } else{
+          console.log("entro");
+          setPoints(0)
+        }
+      })
       .catch(err => console.log(err))
   }, [id])
 
@@ -86,8 +93,10 @@ function JourneyDetailScreen() {
     getScoreFunction()
   }, [getBookings, getScoreFunction])
 
-  console.log(points);
-    
+  console.log("journey", journey);
+  console.log("score", score);
+  console.log("points", score);
+
   return (
     <div className="container">
       Detail
@@ -95,7 +104,7 @@ function JourneyDetailScreen() {
         :
         <div className="row">
           <div className="col-4">
-            <h2><strong>{moment(journey.date).format('MM/DD/YYYY')}</strong></h2>
+            <h2><strong>{moment(journey.date).format('DD/MM/YYYY')}</strong></h2>
             <h4><strong><span>Departure time: {journey.departureTime} / </span><span> From: {journey.origin.street}</span></strong></h4>
             <h4><strong><span>Return hour:{journey.returnTime} / </span><span> To: {journey.destination.street}</span></strong></h4>
           </div> 
@@ -103,7 +112,10 @@ function JourneyDetailScreen() {
           <div className="col-4">
             <h3><strong>{journey.vehicle.typeOf}</strong></h3>
             <h3>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h3>
-            <h3>Rating: {points}</h3>
+            { points?  <h3>Rating: {points}</h3>
+            : 
+            <h3>No Rating</h3>
+             }
 
             <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
           </div>
