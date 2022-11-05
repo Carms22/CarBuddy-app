@@ -17,7 +17,6 @@ function CreatorScreenDetail() {
   useEffect(() => {
     getCreator(id)
       .then( creator => {
-        console.log("creator en useEff", creator);
         setCreator(creator)
         setRating(calculateUserScore(creator.score))
       })
@@ -26,7 +25,6 @@ function CreatorScreenDetail() {
   useEffect(() => {
     getListByCreator(id)
       .then( journeys => {
-        console.log("journeys en useEff", journeys);
         setJourneys(journeys)
       })
   },[id])

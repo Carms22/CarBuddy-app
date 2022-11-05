@@ -28,6 +28,7 @@ function App() {
         <Route path='/journeys/:id' element={<JourneyDetailScreen/>}/>
         {/* edit */}
         <Route path='/journeys/create' element={<JourneyFormScreen/>}/>
+        <Route path='/journeys/:id/edit' element={<JourneyFormScreen/>}/>
         {/*  */}
         <Route path='/register' element={<Register/>}/>
         <Route 

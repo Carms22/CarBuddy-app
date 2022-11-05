@@ -14,6 +14,9 @@ export const getListByCreator = (id) =>
 export const postJourney = (body) => 
   http.post("/journeys", body).then( res => res);
 
+export const updateJourney = (id, body) => 
+  http.post(`/journeys/${id}/edit`, body).then( res => res);
+
 export const deleteJourney = (id) => 
   http.delete(`/journeys/${id}`).then( res => res);
 

@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { postJourney } from "../../services/JourneyService";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import moment from 'moment';
+import { getJourneyDetail, postJourney, updateJourney } from "../../services/JourneyService";
 import { getCurrentUser } from "../../services/UserService";
 import Input from "../misc/Input";
 import SearchBar from "../misc/SearchBar.jsx/SearchBar";
 
 
 function JourneyForm() {
+  const { id } = useParams()
   const navigate = useNavigate();
   const [data, setData] = useState({
     origin: {
@@ -27,6 +29,18 @@ function JourneyForm() {
     date: "",
     creator: ""
   });
+
+  useEffect(() => {
+    if (id) {
+      getJourneyDetail(id)
+        .then(journey => {
+          setData({
+            ...journey,
+            date: moment(journey.date).format('YYYY-MM-DD')
+          })
+        })
+    }
+  }, [id])
 
   const handleOnChange = (event) => {
       const { name, value } = event.target
@@ -59,33 +73,23 @@ function JourneyForm() {
   const onSubmit = ( event )=> {
     console.log(data);
     event.preventDefault()
-    postJourney(data)
-      .then(result => {
-        navigate("/profile")
-      })
+    if (id) {
+      updateJourney(id, data)
+        .then( journeyUpdated => {
+          navigate(`/journeys/${id}`)
+        })
+    } else {
+      postJourney(data)
+        .then(result => {
+          navigate("/profile")
+        })
+    }
   }
-
-  // const onSubmit = (event) => {
-  //   event.preventDefault()
-
-  //   if (edit) {
-  //     updateUser(id, user).then(user => console.log(user))
-  //   } else {
-  //     createUser(user).then(user => console.log(user))
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (edit) {
-  //     getDetail(id)
-  //       .then(user => setUser(user))
-  //   }
-  // }, [id, edit])
 
   return ( 
     
     <div className="container">
-    {/* <h1>{edit ? 'Update Journey!' : 'Create Journey!'}</h1> */}
+    <h1>{id ? 'Update Journey!' : 'Create Journey!'}</h1>
       <form onSubmit={onSubmit}>
         <select 
            type="text"

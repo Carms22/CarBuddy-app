@@ -3,7 +3,7 @@ import { getBookings } from '../../services/BookingService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useCallback, useEffect, useState } from 'react';
 import "../../styles/partials/screens/UserDetailScreen.scss"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getCurrentUser, getListYourJourneys } from '../../services/UserService';
 import Card from '../../components/journeys/Card';
 import { deleteJourney } from '../../services/JourneyService';
@@ -17,13 +17,14 @@ function UserDetailScreen() {
   const [bookings, setBooking] = useState([]);
   const [journeysOfUser, setJourneys] = useState([]);
   const [score, setScore] = useState([])
+  const navigate = useNavigate()
 
   function handleLogout(){
     logout()
       .then(result => console.log("you just logout"))
       .catch(err => console.log(err))
   };
-
+  //Delete
   function handleDlete(id){
     deleteJourney(id)
       .then(result => {
@@ -31,6 +32,10 @@ function UserDetailScreen() {
         getJourneysOfCreator()
       })
       .catch(err => console.log(err))
+  };
+  //Edit --go to form
+  function handleUpdate(id){
+    navigate(`/journeys/${id}/edit`)
   };
 
   const getBookingsCallBack = useCallback(() =>{
@@ -42,6 +47,7 @@ function UserDetailScreen() {
   const getJourneysOfCreator = useCallback(() => {
     getListYourJourneys()
       .then( journeys => {
+        console.log("journeys of creator", journeys);
         setJourneys(journeys)
       })
       .catch(err => console.log(err))
@@ -59,7 +65,7 @@ function UserDetailScreen() {
       })
   },[getJourneysOfCreator])
 
-
+  //PROFILE
   return ( 
     <div className='container'>
       <div className='row'>
@@ -91,12 +97,14 @@ function UserDetailScreen() {
       
         }
       </div>
+
       <h3>My Journeys</h3>
       <div className='container'>
         { journeysOfUser ? journeysOfUser.map( journey =>
           <div className=' row' key={journey.id}>
             <Card className='col-8' {...journey} />
-            <button className='col-4' onClick={() => handleDlete(journey.id)}>Delete</button>
+            <button className='col-2' onClick={() => handleDlete(journey.id)}>Delete</button>
+            <button className='col-2' onClick={() => handleUpdate(journey.id)}>Edit</button>
           </div>
         )
         :
