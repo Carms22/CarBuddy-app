@@ -4,9 +4,10 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { useCallback, useEffect, useState } from 'react';
 import "./UserDetailScreen.scss"
 import { Link } from 'react-router-dom';
-import { getListYourJourneys } from '../../services/UserService';
+import { getCurrentUser, getListYourJourneys } from '../../services/UserService';
 import Card from '../../components/journeys/Card';
 import { deleteJourney } from '../../services/JourneyService';
+import { calculateUserScore } from '../../helper/scoreHelper';
 
 
 
@@ -14,6 +15,7 @@ function UserDetailScreen() {
   const { user } = useAuthContext();
   const [bookings, setBooking] = useState([]);
   const [journeysOfUser, setJourneys] = useState([]);
+  const [score, setScore] = useState([])
 
   function handleLogout(){
     logout()
@@ -51,15 +53,21 @@ function UserDetailScreen() {
 
   useEffect( ()=> {
     getJourneysOfCreator()
+    getCurrentUser()
+      .then( user =>{
+        setScore(calculateUserScore(user.score))
+      })
   },[getJourneysOfCreator])
 
 
- console.log("journeys....", journeysOfUser);
+ console.log("user....", user.score);
+ console.log("score....", score);
 
   return ( 
     <div className='container'>
       <div className='row'>
         <h3 className='col-10'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h3>
+        <p>Rating: {score}</p>
         <button className="col-2" onClick={handleLogout}>Logout</button>
       </div>
 

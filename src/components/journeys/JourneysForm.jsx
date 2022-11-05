@@ -5,7 +5,7 @@ import { getCurrentUser } from "../../services/UserService";
 import Input from "../misc/Input";
 import SearchBar from "../misc/SearchBar.jsx/SearchBar";
 
-/// USAR EL CONTEXT user
+
 function JourneyForm() {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -65,8 +65,27 @@ function JourneyForm() {
       })
   }
 
+  // const onSubmit = (event) => {
+  //   event.preventDefault()
+
+  //   if (edit) {
+  //     updateUser(id, user).then(user => console.log(user))
+  //   } else {
+  //     createUser(user).then(user => console.log(user))
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (edit) {
+  //     getDetail(id)
+  //       .then(user => setUser(user))
+  //   }
+  // }, [id, edit])
+
   return ( 
+    
     <div className="container">
+    {/* <h1>{edit ? 'Update Journey!' : 'Create Journey!'}</h1> */}
       <form onSubmit={onSubmit}>
         <select 
            type="text"
