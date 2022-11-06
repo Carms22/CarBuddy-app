@@ -20,7 +20,7 @@ function Card({origin, destination, price, departureTime, creator, date,id, vehi
           <div className="col-6">
             <h6>Driver: {creator.name}<img className='img-user' src={creator.image} alt='Buddy'/></h6>
             <p className="card-text">Price: {parsePrice(price)}-<strong>Seats left:</strong> {vehicle.seats}</p>
-            <Rating>{creator.score}</Rating>
+            <Rating>{calculateUserScore(creator.score)}</Rating>
           </div>
         </div>
       </div>

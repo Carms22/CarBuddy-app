@@ -116,15 +116,33 @@ function JourneyDetailScreen() {
             <button className="button text-center" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
 
             <div className="last">
+              <h4 className="light"><strong>Driver:</strong></h4>
               <div className="row driver card-detail">
                 <div className="col-10 start">
-                  <h5>Buddy: {journey.creator.name}</h5>
+                  <h5>Driver: {journey.creator.name}</h5>
                   <Rating>{calculateUserScore(journey.creator.score)}</Rating>
                 </div>
                 <img className="img-user" src={journey.creator.image} alt="Buddy"/>
               </div>
               <Link className="button" to={`/creators/${id}`}>Detail</Link>
             </div>
+          </div>
+
+          <div className="container start-div">
+          <h4 className="light"><strong>Passengers:</strong></h4>
+            { bookings.map(booking =>
+              <div className="last">
+                <div className="row driver card-detail">
+                  <div className="col-10 start">
+                    <h5>Buddy: {booking.user.name}</h5>
+                    <Rating>{calculateUserScore(booking.user.score)}</Rating>
+                  </div>
+                  <img className="img-user" src={booking.user.image} alt="Buddy"/>
+                </div>
+                <Link className="button" to={`/users/${booking.user.id}`}>Detail</Link>
+              </div> 
+            )     
+            }
           </div>
 
           <div className="container">
@@ -144,8 +162,7 @@ function JourneyDetailScreen() {
         </div>
       </div> 
       </>
-      }
-      
+      }   
       
       {/* Comment create*/}
       <>
