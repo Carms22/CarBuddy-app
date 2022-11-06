@@ -23,7 +23,7 @@ const Rating = (props) => {
   }
   return (
     <div>
-      <h4> {numberStarts()}</h4>
+      <h6> {numberStarts()}</h6>
     </div>
   )
 }

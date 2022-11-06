@@ -2,13 +2,15 @@ import {logout} from '../../store/AccessTokenStore'
 import { getBookings } from '../../services/BookingService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useCallback, useEffect, useState } from 'react';
-import "../../styles/partials/screens/UserDetailScreen.scss"
+import moment from 'moment';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCurrentUser, getListYourJourneys } from '../../services/UserService';
 import Card from '../../components/journeys/Card';
 import { deleteJourney } from '../../services/JourneyService';
 import { calculateUserScore } from '../../helper/scoreHelper';
+import { parsePrice } from '../../helper/priceHelper';
 import Rating from '../../components/journeys/Rating';
+import "../../styles/partials/screens/UserDetailScreen.scss"
 import '../../styles/partials/components/Button.scss'
 import '../../styles/partials/components/Card.scss'
 
@@ -21,6 +23,7 @@ function UserDetailScreen() {
   const [score, setScore] = useState([])
   const navigate = useNavigate()
 
+  //Logout
   function handleLogout(){
     logout()
       .then(result => console.log("you just logout"))
@@ -37,7 +40,6 @@ function UserDetailScreen() {
   };
   //Edit --go to form
   function handleUpdate(id){
-    console.log("handleUpdate", id);
     navigate(`/journeys/${id}/edit`)
   };
 
@@ -67,33 +69,32 @@ function UserDetailScreen() {
       })
   },[getJourneysOfCreator])
 
-  console.log(bookings);
+  console.log("journeys", journeysOfUser);
 
-  //PROFILE
+  //PROFILE 🚙
   return ( 
     <div className='container'>
-      <div className='row'>
-        <h3 className='col-8'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h3>
-        <button className="button col-2" onClick={handleLogout}>Logout</button>
+      <div className='row text-center'>
+        <h3 className='col-12'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h3>
         <Rating className="text-center">{score}</Rating>
+        <button className="button" onClick={handleLogout}>Logout</button>
       </div>
 
       <h3>My booking: </h3>
       <div className='container'>
         {bookings && bookings.map(booking => 
           <>
-          {console.log("booking.journey",booking.journey)}
             <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
               <div className='row card-body'>
-                <div className='col-8'>
-                  <h5>From: {booking.journey.origin.street}</h5>
-                  <h5>To: {booking.journey.destination.street}</h5>
+                <div className='col-6'>
+                  <h6>From: {booking.journey.origin.street}</h6>
+                  <h6>To: {booking.journey.destination.street}</h6>
                   <h6>Departure time: {booking.journey.departureTime.toString()}</h6>
-                  
+                  <h6>Date: {moment(booking.journey.date).format('DD/MM/YYYY')}</h6>
                 </div>
-                <div className='col-4'>
-                  <h5>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h5>
-                  <h6>Price: {booking.journey.price} €</h6>
+                <div className='col-6'>
+                  <h6>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h6>
+                  <h6>Price: {parsePrice(booking.journey.price)}</h6>
                   <h6>Seats left: {booking.journey.vehicle.seats}</h6>
                   <Rating>{calculateUserScore(booking.journey.creator.score)}</Rating>
                 </div>
@@ -108,12 +109,10 @@ function UserDetailScreen() {
       <h3>My Journeys</h3>
       <div className='container'>
         { journeysOfUser ? journeysOfUser.map( journey =>
-          <div className=' row' key={journey.id}>
-            <div className=' container'>
-              <Card className='col-8' {...journey} />
-              <button className='button col-2' onClick={() => handleDlete(journey.id)}>Delete</button>
-              <button className='button col-2' onClick={() => handleUpdate(journey.id)}>Edit</button>
-            </div>
+          <div className=' container'>
+            <Card className='card' {...journey} key={journey.id}/>
+            <button className='button col-4' onClick={() => handleDlete(journey.id)}>Delete</button>
+            <button className='button col-4' onClick={() => handleUpdate(journey.id)}>Edit</button>
           </div>
         )
         :

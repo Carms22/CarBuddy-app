@@ -41,7 +41,7 @@ function JourneysList (){
         <div className="container">
           { journeys?
             journeys.map( journey => (
-            <Card {...journey} key={journey.id} className='Card'/>
+            <Card {...journey} key={journey.id} className='card'/>
           ))
           :
           <p>No journey this time</p>
