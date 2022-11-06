@@ -36,7 +36,7 @@ function JourneysList (){
             handleSearchBar={handleSearchBar}
             placeholder="Filter by destination of the journey"
           />
-          <button type="submit">Search</button>
+          <button className="button" type="submit">Search</button>
         </form>
         <div className="container">
           { journeys?

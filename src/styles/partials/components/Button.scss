@@ -7,7 +7,7 @@
   font-size:20px;
   border-radius:10px;
   cursor:pointer;
-  color: black;
+  color: rgb(53, 50, 50);
   font-weight:bold;
   box-shadow:1px 2px 3px rgba(0,0,0,0.3);
   text-decoration:wavy;
@@ -21,4 +21,10 @@
 button{
   max-width: 200px;
   max-height: 50px;
+}
+
+*:disabled {
+  background-color: rgb(87, 110, 101);
+  color: linen;
+  opacity: 1;
 }

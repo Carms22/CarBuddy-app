@@ -39,20 +39,19 @@ const HomeScreen = () => {
             </div>
           </div>
         </div>
-        
       </div>
+
       <div className='container Map'>
         <h2>Check the buddies that goes to your work destination</h2>
         <MapComponent />
-
       </div>
-      <div className="p-5">
+
         <div className="row">     
           <div className="link-card">
             <JourneysList />
           </div>
-        </div>
       </div>
+
     </div>
   );
 };

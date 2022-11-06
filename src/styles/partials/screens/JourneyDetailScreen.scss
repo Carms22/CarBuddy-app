@@ -1,0 +1,52 @@
+@import '../base/variables';
+@import '../base/font';
+
+.DetailScreen {
+  margin: 10px;
+  text-align: center;
+  color: $primary;
+  font-family: $font-Varela;
+
+  .light{
+    color: $light;
+    font-weight: bold;
+  }
+  
+  .card-detail{
+    margin: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-radius: 5%;
+  }
+  textarea {
+    width: 100%;
+    border: 1px solid $primary;
+    border-radius: 5px;
+  }
+  .last{
+    margin-bottom: 40px;
+  }
+  .start-div{
+    text-align: start; 
+    margin: 10px auto;
+    max-width: 650px;
+
+    .comment{
+      max-width: 600px;
+    }
+
+    .driver{
+      margin-bottom: 10px ;
+      .start{
+        text-align: start;
+      }
+      img{
+        text-align: end;
+      }
+     
+    }
+  }
+  
+
+}

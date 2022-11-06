@@ -1,10 +1,13 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import {  Link, useNavigate, useParams } from "react-router-dom";
 import moment from 'moment'; 
-import { getJourneyDetail, getScore, postComment, postScore } from "../../services/JourneyService";
-import AuthContext from "../../contexts/AuthContext"
+import { getJourneyDetail, postComment, postScore } from "../../services/JourneyService";
+import AuthContext from "../../contexts/AuthContext";
 import { getBookingsJourney, postBooking } from "../../services/BookingService";
 import { calculateUserScore } from "../../helper/scoreHelper";
+import { parsePrice } from "../../helper/priceHelper";
+import Rating from "../../components/journeys/Rating";
+import '../../styles/partials/screens/JourneyDetailScreen.scss';
 
 function JourneyDetailScreen() {
   const {id}= useParams();
@@ -13,7 +16,6 @@ function JourneyDetailScreen() {
   const [comment, setComment] = useState({content: ""});
   const [score, setScore] = useState();
   const [bookings, setBooking] =  useState([])
-  const [points, setPoints] = useState()
   const navigate = useNavigate();
 
   //Comments submit
@@ -51,10 +53,10 @@ function JourneyDetailScreen() {
         .then(score => {
           console.log('onSubmit' , score);
           getBookings()
-          getScoreFunction()
         })
   }
-
+  
+  console.log("journey", journey);
 
   //Journey details
   useEffect(() =>{
@@ -74,62 +76,63 @@ function JourneyDetailScreen() {
       .catch(err => console.log(err))
   }, [id])
 
-  const getScoreFunction = useCallback(() => {
-    getScore(id)
-      .then(scores => {  
-        if(scores.length !== 0){
-          console.log("no debería entrar");
-          setPoints(calculateUserScore(scores))
-        } else{
-          console.log("entro");
-          setPoints(0)
-        }
-      })
-      .catch(err => console.log(err))
-  }, [id])
+  
 
   useEffect(() =>{
     getBookings()
-    getScoreFunction()
-  }, [getBookings, getScoreFunction])
-
-  console.log("journey", journey);
-  console.log("score", score);
-  console.log("points", score);
+  }, [getBookings])
 
   return (
-    <div className="container">
-      Detail
-      { !journey ? "Loaiding" 
-        :
-        <div className="row">
-          <div className="col-4">
-            <h2><strong>{moment(journey.date).format('DD/MM/YYYY')}</strong></h2>
-            <h4><strong><span>Departure time: {journey.departureTime} / </span><span> From: {journey.origin.street}</span></strong></h4>
-            <h4><strong><span>Return hour:{journey.returnTime} / </span><span> To: {journey.destination.street}</span></strong></h4>
-          </div> 
-    
-          <div className="col-4">
-            <h3><strong>{journey.vehicle.typeOf}</strong></h3>
-            <h3>Price: {journey.price}€ - seats left: {journey.vehicle.seats}</h3>
-            { points?  <h3>Rating: {points}</h3>
-            : 
-            <h3>No Rating</h3>
-             }
+    <div className="container DetailScreen">
 
-            <button className="btn btn-dark" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
+      { !journey ? "Loaiding" 
+      :
+      <>
+      <div className="container">
+        <div className="start-div">
+          <div className="container last">
+            <h3 className="light"><strong>{moment(journey.date).format('dddd, LL')}</strong></h3>
+            <div className="card-detail">
+              <h4>From: <strong> {journey.origin.street}</strong></h4>
+              <h4>Departure time:<strong>{journey.departureTime}</strong></h4>
+            </div>
+            <div className="card-detail">
+              <h4>To: <strong> {journey.destination.street}</strong></h4>
+              <h4>Return hour: <strong>{journey.returnTime}</strong></h4>
+            </div>
+          
+            <div className="card-detail">
+              <div className="row">
+                <h6 className="col-6">Vehicle: <strong>{journey.vehicle.typeOf}</strong></h6>
+                <h6 className="col-6">Price: <strong>{parsePrice(journey.price)}</strong>-seats left: <strong>{journey.vehicle.seats}</strong></h6>
+                { journey.score?
+                  
+                <Rating className="col-4">{calculateUserScore(journey.score)}</Rating>
+                : 
+                <h6>No Rating</h6>
+                }
+              </div>
+            </div>
+            <button className="button text-center" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
+
+            <div className="last">
+              <div className="row driver card-detail">
+                <div className="col-10 start">
+                  <h5>Buddy: {journey.creator.name}</h5>
+                  <Rating>{calculateUserScore(journey.creator.score)}</Rating>
+                </div>
+                <img className="img-user" src={journey.creator.image} alt="Buddy"/>
+              </div>
+              <Link className="button" to={`/creators/${id}`}>Detail</Link>
+            </div>
           </div>
-          <div  className="col-4">
-            <h6>Buddy: {journey.creator.name}</h6>
-            <h6>Buddy: {journey.creator.image}</h6>
-            <Link to={`/creators/${id}`}>Detail</Link>
-          </div>
- 
+
           <div className="container">
+            <h4 className="light"><strong>Comments:</strong></h4>
             <div className="row">
               { journey.comments ? journey.comments.map( (comment) => 
-                <div  className="col-4" key={comment.id}>
-                  <h4>{comment.commentCreator.name}</h4>
+                <div  className="col-4 card-detail" key={comment.id}>
+                  <h5><strong>{comment.commentCreator.name}</strong></h5>
                   <p>{comment.content}</p>
                 </div> 
                 )
@@ -139,33 +142,37 @@ function JourneyDetailScreen() {
             </div>
           </div>
         </div>
+      </div> 
+      </>
       }
       
+      
       {/* Comment create*/}
-      <div className="container row">
+      <>
       { user &&
-       <div className="mb-4 col-6">
-          <h3 className="comment">Add a comment</h3>
-          <form onSubmit={onSubmit}>
-            <div className="comment-form">
-              <textarea className="" 
-                onChange={handleOnChange} 
-                name="content"
-                value={comment.content} 
-                id="comment" maxLength ="100"></textarea>
-              <button type="submit" className="btn btn-dark mt-3 comment-btn ">Submit</button>
-            </div>
+        <div className="container start-div">
+          <h4 className="light"><strong>Add a comment</strong></h4>
+          <form className="comment" onSubmit={onSubmit}>
+            <textarea  
+              onChange={handleOnChange} 
+              name="content"
+              value={comment.content} 
+              id="comment" maxLength ="100"></textarea>
+            <button type="submit" className="button ">Submit</button>
           </form>
         </div>
       }
+      </>
 
       {/* Form to score journey */}
+      <>
+      <div className="container start-div">
       { bookings.map(booking => 
         user.id===booking.user.id && !booking.isValidated ? 
           <div className="col-6" key={booking.id}>
             <form className="container row" onSubmit={onSubmitScore}>
               <input type="hidden" name="bookingId" value={booking.id}/>
-              <label className="">Evaluate the journey</label>
+              <h4><label className="light">Evaluate the journey</label></h4>
               <select    
                 type="number"
                 name="points" id="points"
@@ -180,18 +187,16 @@ function JourneyDetailScreen() {
                 <option value={4}>4</option>
                 <option value={5}>5</option>
               </select>
-              <button type="submit">Submit</button>
+              <button className="button" type="submit">Submit</button>
             </form>
           </div>
-          :
-          <div></div>
-      )
+        :
+        <div></div>
+      )}
+      </div>
+      </>
 
-      }
-     
-     </div>
     </div> 
-
   );
 }
 
