@@ -6,15 +6,12 @@
   border-radius: 10px;
   text-decoration:wavy;
   color: $primary;
-  margin: 10px;
-  
+  margin: 10px 0;
 
   &:hover {
     color: rgb(137, 58, 202);
   }
-
 }
-
 
 .link-card{
   a:-webkit-any-link {

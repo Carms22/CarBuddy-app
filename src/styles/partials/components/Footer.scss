@@ -22,7 +22,7 @@
     padding: 0;
     transition: ease .25s;
     a {
-      margin-left: 10px;
+      margin-left: 20px;
       display: inline-block;
       line-height: 1.8;
       text-decoration: none;
@@ -30,7 +30,6 @@
       transition: ease .25s;
     }
     a:before {
-      content: "·";
       font-size: 20px;
       left: 0;
       color: #fff;
@@ -40,6 +39,7 @@
     a:hover{text-decoration:underline;}  
   }
   .footer-right {
+    margin-left: 0;
     float: right;
     margin-top: 6px;
     max-width: 200px;

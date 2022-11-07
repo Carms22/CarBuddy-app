@@ -5,6 +5,7 @@ import { getJourneyDetail, postJourney, updateJourney } from "../../services/Jou
 import { getCurrentUser } from "../../services/UserService";
 import Input from "../../components/misc/Input";
 import SearchBar from "../../components/misc/SearchBar.jsx/SearchBar";
+import '../../styles/partials/screens/JourneyFormScreen.scss'
 
 
 function JourneyForm() {
@@ -91,11 +92,11 @@ function JourneyForm() {
 
   return ( 
     
-    <div className="container">
+    <div className="FormScreen">
     <h1>{id ? 'Update Journey!' : 'Create Journey!'}</h1>
-      <form onSubmit={onSubmit}>
+      <form className="start-div" onSubmit={onSubmit}>
         <select 
-           type="text"
+            type="text"
             name="typeOf" id="typeOf"
             value={data.vehicle.typeOf} onChange={handleOnChangeVehicle}
             placeholder="Type of vehicle"
@@ -106,7 +107,8 @@ function JourneyForm() {
           <option value="Motocycle">Motocycle</option>
         </select>
         <Input 
-           type="text"
+            className="Input"
+            type="text"
             name="seats" id="seats"
             value={data.vehicle.seats} onChange={handleOnChangeVehicle}
             placeholder="Number of seats"
@@ -154,8 +156,8 @@ function JourneyForm() {
             required
           />
         <div className="row">
-          <button className="col-6">Submit</button>
-          {id && <button className="col-6" onClick={() => handleCancel(id)}>Cancel</button>}
+          <button className="col-4 button">Submit</button>
+          {id && <button className="col-4 button" onClick={() => handleCancel(id)}>Cancel</button>}
         </div>
       </form>
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Card from "../../components/journeys/Card";
 import SearchBar from "../../components/misc/SearchBar.jsx/SearchBar";
 import {getJourneys} from '../../services/JourneyService'
@@ -17,15 +17,20 @@ function JourneysList (){
     event.preventDefault()
     getJourneysFromSearch(data)
       .then(journeysFetched => setJourneys(journeysFetched))
+
   }
 
-  useEffect( ()=> {
+  const getAllJourneys = useCallback(() =>{
     getJourneys()
-      .then( journeys => {
-        setJourneys(journeys)
-      })
-      .catch(err => err)
+    .then( journeys => {
+      setJourneys(journeys)
+    })
+    .catch(err => err)
   },[])
+
+  useEffect( ()=> {
+    getAllJourneys()
+  },[getAllJourneys])
 
   return(
     <div>
@@ -38,10 +43,10 @@ function JourneysList (){
           />
           <button className="button" type="submit">Search</button>
         </form>
-        <div className="container">
+        <div className="container link-card">
           { journeys?
             journeys.map( journey => (
-            <Card {...journey} key={journey.id} className='card'/>
+            <Card {...journey} key={journey.id}/>
           ))
           :
           <p>No journey this time</p>

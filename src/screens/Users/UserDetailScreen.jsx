@@ -71,7 +71,7 @@ function UserDetailScreen() {
 
   console.log("journeys", journeysOfUser);
 
-  //PROFILE 🚙
+  //PROFILE 
   return ( 
     <div className='container'>
       <div className='row text-center'>
@@ -87,29 +87,28 @@ function UserDetailScreen() {
             <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
               <div className='row card-body'>
                 <div className='col-6'>
-                  <h6>From: {booking.journey.origin.street}</h6>
-                  <h6>To: {booking.journey.destination.street}</h6>
-                  <h6>Departure time: {booking.journey.departureTime.toString()}</h6>
-                  <h6>Date: {moment(booking.journey.date).format('DD/MM/YYYY')}</h6>
+                  <h6><strong>From: </strong>{booking.journey.origin.street}</h6>
+                  <h6><strong>To: </strong>{booking.journey.destination.street}</h6>
+                  <h6><strong>Departure time: </strong>{booking.journey.departureTime.toString()}</h6>
+                  <h6><strong>Date: </strong>{moment(booking.journey.date).format('DD/MM/YYYY')}</h6>
                 </div>
                 <div className='col-6'>
-                  <h6>Driver buddy: {booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h6>
-                  <h6>Price: {parsePrice(booking.journey.price)}</h6>
-                  <h6>Seats left: {booking.journey.vehicle.seats}</h6>
+                  <h6><strong>Driver buddy: </strong>{booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h6>
+                  <h6><strong>Price: </strong>{parsePrice(booking.journey.price)}</h6>
+                  <h6><strong>Seats left: </strong>{booking.journey.vehicle.seats}</h6>
                   <Rating>{calculateUserScore(booking.journey.creator.score)}</Rating>
                 </div>
               </div>
             </Link>
           </>
-        )
-      
+          )
         }
       </div>
 
       <h3>My Journeys</h3>
       <div className='container'>
         { journeysOfUser ? journeysOfUser.map( journey =>
-          <div className=' container link-card'>
+          <div className='link-card'>
             <Card className='card' {...journey} key={journey.id}/>
             <button className='button col-4' onClick={() => handleDlete(journey.id)}>Delete</button>
             <button className='button col-4' onClick={() => handleUpdate(journey.id)}>Edit</button>

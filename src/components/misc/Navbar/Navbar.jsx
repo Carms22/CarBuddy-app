@@ -17,28 +17,28 @@ function Navbar(){
       <div className="collapse navbar-collapse" id="main-nav">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+            <NavLink to="/" className="navbar__li">Home</NavLink>
         </li>
         {
           user ?
           <>
             <li className="nav-item">
-              <NavLink to="/journeys" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Journeys</NavLink>
+              <NavLink to="/journeys" className="navbar__li">Journeys</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Profile</NavLink>
+              <NavLink to="/profile" className="navbar__li">Profile</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/journeys/create" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>New Journeys</NavLink>
+              <NavLink to="/journeys/create" className="navbar__li">New Journeys</NavLink>
             </li>
           </>
           :
           <>
             <li className="nav-item">
-              <NavLink to="/register" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Register</NavLink>
+              <NavLink to="/register" className="navbar__li">Register</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
+              <NavLink to="/login" className="navbar__li">Login</NavLink>
             </li>
           </>
         }    

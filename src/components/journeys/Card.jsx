@@ -12,7 +12,6 @@ function Card({origin, destination, price, departureTime, date, id, creator, veh
       
       <div className="card">
         <div className="card-body row">
-        {console.log("score y creator", score,creator)}
           <div className="col-6">
             <h6 className="card-title"><strong>From:</strong> {origin.street}</h6>
             <h6 className="card-title"><strong>To:</strong> {destination.street}</h6>

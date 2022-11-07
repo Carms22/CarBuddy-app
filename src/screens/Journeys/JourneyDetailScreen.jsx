@@ -82,7 +82,7 @@ function JourneyDetailScreen() {
 
   return (
     <div className="container DetailScreen">
-
+      
       { !journey ? "Loaiding" 
       :
       <>
@@ -91,18 +91,18 @@ function JourneyDetailScreen() {
           <div className="container last">
             <h3 className="light"><strong>{moment(journey.date).format('dddd, LL')}</strong></h3>
             <div className="card-detail">
-              <h4>From: <strong> {journey.origin.street}</strong></h4>
-              <h4>Departure time:<strong>{journey.departureTime}</strong></h4>
+              <h5>From: <strong> {journey.origin.street}</strong></h5>
+              <h5>Departure time:<strong>{journey.departureTime}</strong></h5>
             </div>
             <div className="card-detail">
-              <h4>To: <strong> {journey.destination.street}</strong></h4>
-              <h4>Return hour: <strong>{journey.returnTime}</strong></h4>
+              <h5>To: <strong> {journey.destination.street}</strong></h5>
+              <h5>Return hour: <strong>{journey.returnTime}</strong></h5>
             </div>
           
             <div className="card-detail">
               <div className="row">
-                <h6 className="col-6">Vehicle: <strong>{journey.vehicle.typeOf}</strong></h6>
-                <h6 className="col-6">Price: <strong>{parsePrice(journey.price)}</strong>-seats left: <strong>{journey.vehicle.seats}</strong></h6>
+                <h5 className="col-6">Vehicle: <strong>{journey.vehicle.typeOf}</strong></h5>
+                <h5 className="col-6">Price: <strong>{parsePrice(journey.price)} </strong> - seats left: <strong>{journey.vehicle.seats}</strong></h5>
                 { journey.score?
                   
                 <Rating className="col-4">{calculateUserScore(journey.score)}</Rating>
@@ -116,7 +116,7 @@ function JourneyDetailScreen() {
             <div className="last">
               <h4 className="light"><strong>Driver:</strong></h4>
               <div className="row driver card-detail">
-                <div className="col-10 start">
+                <div className="col-8 start">
                   <h5>Driver: {journey.creator.name}</h5>
                   <Rating>{calculateUserScore(journey.creator.score)}</Rating>
                 </div>
@@ -131,14 +131,14 @@ function JourneyDetailScreen() {
             { bookings && bookings.map(booking => 
                 <div className="last">
                   <div className="row driver card-detail">
-                    <div className="col-10 start">
+                    <div className="col-8 start">
                       <h5>Buddy: {booking.user.name}</h5>
                       <Rating>{calculateUserScore(booking.user.score)}</Rating>
                     </div>
                     <img className="img-user" src={booking.user.image} alt="Buddy"/>
                   </div>
                 </div> 
-            )     
+                )     
             }
           </div>
 

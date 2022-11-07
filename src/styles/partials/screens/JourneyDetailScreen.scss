@@ -2,10 +2,14 @@
 @import '../base/font';
 
 .DetailScreen {
-  margin: 10px;
+  margin: 30px 0;
   text-align: center;
   color: $primary;
   font-family: $font-Varela;
+
+  button{
+    margin-bottom: 20px;
+  }
 
   .light{
     color: $light;
@@ -13,16 +17,15 @@
   }
   
   .card-detail{
-    margin: 5px;
-    padding: 5px;
+    margin: 10px 0;
+    padding: 10px 5px;
     box-sizing: border-box;
     border: 1px solid lightgray;
-    border-radius: 5%;
   }
   textarea {
-    width: 100%;
+    width: 90%;
     border: 1px solid $primary;
-    border-radius: 5px;
+ 
   }
   .last{
     margin-bottom: 40px;

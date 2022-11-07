@@ -4,19 +4,24 @@
 .Navbar{
   font-size: large;
   background-color: $primary;
-  font-family: $font-Varela;
- 
+  
+  .navbar-brand{
+    font-family: $font-Varela;
+    color: #ffff;
+  }
+  .navbar__li{
+    padding: 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffff;
+  }
+  a:hover{
+    color: $secondary;
+  }
   
   img{
     text-align: end;
     max-width: 35px;
   }
-
-  .transparent {
-    opacity: 0.7;
-    -moz-opacity: 0.7;
-    filter: alpha(opacity=70);
-    -khtml-opacity: 0.7;
-  }
-
 }
