@@ -25,6 +25,7 @@ function JourneyDetailScreen() {
       postComment(id,comment)
         .then(journey => {
           setComment({content: ""})
+          getDetails()
         })
     } else{
       <div>You must write a comment</div>
@@ -73,14 +74,12 @@ function JourneyDetailScreen() {
     })
     .catch(err => console.log(err))
   },[id])
-  
 
   useEffect(() =>{
     getBookings()
     getDetails()
   }, [getBookings, getDetails])
 
-  console.log("journey", journey);
   return (
     <div className="container DetailScreen">
 

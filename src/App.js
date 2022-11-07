@@ -13,6 +13,7 @@ import { useAuthContext } from "./contexts/AuthContext";
 import JourneyDetailScreen from './screens/Journeys/JourneyDetailScreen';
 import ErrorScreen from '../src/screens/Error/ErrorScreen';
 import CreatorScreenDetail from './screens/Creator/CreatorScreenDetail';
+import Footer from './components/misc/footer/Footer';
 
 
 function App() {
@@ -49,9 +50,11 @@ function App() {
         />
         <Route path="*" element={<ErrorScreen/>} />
       </Routes>
+      
       ) : (
         <p>Loading...</p>
       )}
+      <Footer/>
     </div>
   );
 }
