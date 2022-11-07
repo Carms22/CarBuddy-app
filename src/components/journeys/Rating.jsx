@@ -1,8 +1,8 @@
 import React from "react";
 
 const Rating = (props) => {
-  console.log(props.children);
   const starts = Math.ceil(props.children);
+  
   const numberStarts = () =>{
     switch (starts) {
       case 0:

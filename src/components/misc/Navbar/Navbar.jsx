@@ -6,7 +6,7 @@ import '../../../styles/partials/components/Card.scss'
 
 function Navbar(){
   const { user } = useAuthContext();
-  console.log(user);
+
   return(
     <nav className= "Navbar navbar navbar-expand-lg main-nav">
     <div className="container">

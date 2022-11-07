@@ -2,20 +2,36 @@
 @import '../base/font';
 
 .FormScreen {
-  margin: 30px 0;
+  margin: 30px 10px;
   text-align: center;
   color: $primary;
   font-family: $font-Varela;
 
-  select{
+  select {
+    outline: 0;
+    border: 1px solid $primary;
+    box-shadow: none;
+
     max-width: 650px;
+    flex: 1;
+    padding: 10px;
+    color: $primary;
+    background-image: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .select {
+    display: flex;
+    max-width: 650px;
+    border-radius: .25em;
+    overflow: hidden;
   }
   h1{
     font-weight: bold;
   }
   .start-div {
     text-align: start; 
-    margin: 10px auto;
     max-width: 650px;
   }
   .Input{

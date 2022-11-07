@@ -1,0 +1,17 @@
+@import '../base/variables';
+@import '../base/font';
+
+.JourneyList{
+  margin: 10px;
+
+  h1{
+    margin: 20px;
+    font-weight: bold;
+    color: $primary;
+    font-family: $font-Varela;
+  }
+  button{
+    max-width: 100px;
+  }
+
+}

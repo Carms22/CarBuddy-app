@@ -96,6 +96,7 @@ function JourneyForm() {
     <h1>{id ? 'Update Journey!' : 'Create Journey!'}</h1>
       <form className="start-div" onSubmit={onSubmit}>
         <select 
+          className="select"
             type="text"
             name="typeOf" id="typeOf"
             value={data.vehicle.typeOf} onChange={handleOnChangeVehicle}
@@ -106,56 +107,64 @@ function JourneyForm() {
           <option value="Car">Car</option>
           <option value="Motocycle">Motocycle</option>
         </select>
-        <Input 
-            className="Input"
-            type="text"
-            name="seats" id="seats"
-            value={data.vehicle.seats} onChange={handleOnChangeVehicle}
-            placeholder="Number of seats"
-            required
+
+        <SearchBar 
+          className="Input"
+          name="origin"
+          handleSearchBar={handleSearchBar}
+          placeholder="Origin of the journey"
         />
 
-          <SearchBar 
-            name="origin"
-            handleSearchBar={handleSearchBar}
-            placeholder="Origin of the journey"
-          />
+        <SearchBar 
+          name="destination"
+          handleSearchBar={handleSearchBar}
+          placeholder="Destination of the journey"
+        />
 
-          <SearchBar 
-            name="destination"
-            handleSearchBar={handleSearchBar}
-            placeholder="Destination of the journey"
-          />
+        <Input 
+          type="text"
+          name="seats" id="seats"
+          value={data.vehicle.seats} onChange={handleOnChangeVehicle}
+          placeholder="Number of seats"
+          required
+        />
 
-          <Input 
-            type="date"
-            name="date" id="date"
-            value={data.date} onChange={handleOnChange}
-            placeholder="Date of the journey"
-            required
-          />
+        <Input 
+          className="Input"
+          type="date"
+          name="date" id="date"
+          value={data.date} onChange={handleOnChange}
+          placeholder="Date of the journey"
+          required
+        />
 
-          <Input type="number"
-            name="departureTime" id="departureTime"
-            value={data.departureTime} onChange={handleOnChange}
-            placeholder="Departure time of the journey"
-            required
-          />
+        <Input 
+          className="Input"
+          type="time"
+          name="departureTime" id="departureTime"
+          value={data.departureTime} onChange={handleOnChange}
+          placeholder="Departure time of the journey"
+          required
+        />
 
-          <Input type="number"
-            name="returnTime" id="returnTime"
-            value={data.returnTime} onChange={handleOnChange}
-            placeholder="Return time of the journey"
-            required
-          />
-    
-          <Input type="number"
-            name="price" id="price"
-            value={data.price} onChange={handleOnChange}
-            placeholder="Prices of the journey"
-            required
-          />
-        <div className="row">
+        <Input 
+          className="Input"
+          type="time"
+          name="returnTime" id="returnTime"
+          value={data.returnTime} onChange={handleOnChange}
+          placeholder="Return time of the journey"
+          required
+        />
+  
+        <Input 
+          className="Input"
+          type="number"
+          name="price" id="price"
+          value={data.price} onChange={handleOnChange}
+          placeholder="Prices of the journey"
+          required
+        />
+        <div className="">
           <button className="col-4 button">Submit</button>
           {id && <button className="col-4 button" onClick={() => handleCancel(id)}>Cancel</button>}
         </div>
