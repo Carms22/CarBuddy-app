@@ -16,16 +16,14 @@ function MapComponent() {
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
 
   const getJourneysAgain = useCallback(() =>{ 
-      // fetch new data
-      fetchJourneyData().then(results =>{
-        setJourneys(results)
-      })
-      .catch(err => console.log(err))
+    fetchJourneyData().then(results =>{
+      setJourneys(results)
+    })
+    .catch(err => console.log(err))
   },[])
  
   // initialize map when component mounts
   useEffect(() => {
-    getJourneysAgain()
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       // See style options here: https://docs.mapbox.com/api/maps/#styles
@@ -38,7 +36,6 @@ function MapComponent() {
     map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
     
     map.on("load", () => {
-      
       // add the data source for new a feature collection with no features
       map.addSource("points-data", {
         type: "geojson",
@@ -66,8 +63,7 @@ function MapComponent() {
     map.on("moveend", async () => {
       getJourneysAgain()
         // all layers that consume the "points-data" data source will be updated automatically
-        map.getSource("points-data").setData(journeys);
-
+      map.getSource("points-data").setData(journeys);
     });
 
     // change cursor to pointer when user hovers over a clickable feature
@@ -117,22 +113,17 @@ function MapComponent() {
     // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
 
     geocoder.on('result', (event) => {
-      console.log(geocoder);
       map.getSource('single-point').setData(event.result.geometry);
     });
 
-
+    console.log(journeys);
     // clean up on unmount
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-  <div className="map-container" ref={mapContainerRef} >
- 
-  </div>
-  
+    <div className="map-container" ref={mapContainerRef}></div>
   );
-
 }
 
 export default MapComponent;

@@ -5,7 +5,7 @@ import AuthContext from "../../contexts/AuthContext"
 import { userLogin } from "../../services/AuthService";
 import LoginSchema from "./LoginSchema";
 import Input from "../../components/misc/Input";
-import "./Login.scss";
+import "../../styles/partials/screens/Login.scss";
 
 
 function Login() {
@@ -50,39 +50,41 @@ function Login() {
   }
 
   return ( 
-    <div className="Login">
-      <div className="login-box">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}> 
-          <Input className="login-input"
-            label="Email"
-            placeholder="Introduce your email"
-            type="email"
-            name="email"
-            id="email"
-            value={values.email}
-            onChange={handleChange}
-            error={errors.email}
-            onBlur={handleBlur}
-          />
-
-            <Input
-              label="Password"
-              placeholder="Write your password"
-              type="password"
-              name="password"
-              id="password"
-              value={values.password}
+    <div className="Login container">
+      <div className="start-div">
+        <div className="login-box">
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}> 
+            <Input className="login-input"
+              label="Email"
+              placeholder="Introduce your email"
+              type="email"
+              name="email"
+              id="email"
+              value={values.email}
               onChange={handleChange}
-              error={errors.password}
+              error={errors.email}
               onBlur={handleBlur}
             />
-          <button type="submit" className="btn btn-primary">
-            {isSubmitting ? 'Loading' : 'Login'}
-          </button>
-        </form>
-      </div>
 
+              <Input
+                label="Password"
+                placeholder="Write your password"
+                type="password"
+                name="password"
+                id="password"
+                value={values.password}
+                onChange={handleChange}
+                error={errors.password}
+                onBlur={handleBlur}
+              />
+            <button type="submit" className="button">
+              {isSubmitting ? 'Loading' : 'Login'}
+            </button>
+          </form>
+        </div>
+
+      </div>
     </div>
    );
 }

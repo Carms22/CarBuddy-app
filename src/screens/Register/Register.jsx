@@ -2,7 +2,8 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/AuthService';
 import Input from '../../components/misc/Input';
-import RegisterSchema from './RegisterSchema'
+import RegisterSchema from './RegisterSchema';
+import '../../styles/partials/screens/Login.scss'
 
 const INITIAL_VALUES = {
   name: '',
@@ -51,60 +52,64 @@ function Register() {
 
 
   return (
-    <div className="container">
-      <h1>Register</h1>
+    <div className="container Login">
+      <div className="start-div">
+        <div className="login-box">
+         <h1>Register</h1>
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Name"
-          placeholder="Add user name"
-          name="name"
-          id="name"
-          value={values.name}
-          onChange={handleChange}
-          error={errors.name}
-          onBlur={handleBlur} 
-        />
+          <form onSubmit={handleSubmit}>
+            <Input
+              label="Name"
+              placeholder="Add user name"
+              name="name"
+              id="name"
+              value={values.name}
+              onChange={handleChange}
+              error={errors.name}
+              onBlur={handleBlur} 
+            />
 
-        <Input
-          label="Email"
-          placeholder="Add email"
-          type="email"
-          name="email"
-          id="email"
-          value={values.email.toLowerCase()}
-          onChange={handleChange}
-          error={errors.email}
-          onBlur={handleBlur}
-        />
+            <Input
+              label="Email"
+              placeholder="Add email"
+              type="email"
+              name="email"
+              id="email"
+              value={values.email.toLowerCase()}
+              onChange={handleChange}
+              error={errors.email}
+              onBlur={handleBlur}
+            />
 
-        <Input
-          label="Password"
-          placeholder="Add password"
-          type="password"
-          name="password"
-          id="password"
-          value={values.password}
-          onChange={handleChange}
-          error={errors.password}
-          onBlur={handleBlur}
-        />
+            <Input
+              label="Password"
+              placeholder="Add password"
+              type="password"
+              name="password"
+              id="password"
+              value={values.password}
+              onChange={handleChange}
+              error={errors.password}
+              onBlur={handleBlur}
+            />
 
-        <Input
-          label="File"
-          placeholder="Add file"
-          type="file"
-          name="image"
-          id="file"
-          onChange={(e) => setFieldValue('image', e.target.files[0])}
-          error={errors.image}
-          onBlur={handleBlur}
-        />
+            <Input
+              label="File"
+              placeholder="Add file"
+              type="file"
+              name="image"
+              id="file"
+              onChange={(e) => setFieldValue('image', e.target.files[0])}
+              error={errors.image}
+              onBlur={handleBlur}
+            />
 
-        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-          {isSubmitting ? 'Loading' : 'Submit'}
-        </button>
-      </form>
+            <button type="submit" className="button" disabled={isSubmitting}>
+              {isSubmitting ? 'Loading' : 'Submit'}
+            </button>
+          </form>
+      </div>
+      </div>
     </div>
   )
 }

@@ -21,9 +21,8 @@ const fetchJourneyData = () => {
           }
         })
       ))
-      console.log("nerfeatures............",newFeaturesList);
+    
       return {
-        
         type: "FeatureCollection",
         features: newFeaturesList
       }

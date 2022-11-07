@@ -6,6 +6,9 @@
   h1{
     font-family: $font-Varela;
   }
+  h2{
+    margin-top: 20px;
+  }
   h5{
     color: $light
   }
@@ -18,7 +21,7 @@
   }
   .header-home{
   background:   url("../../image/home/cabecera-web.png");
-  min-height: 60vh;
+  min-height: 64vh;
   width: 100%;
   background-position: center 100%;
   background-size: cover;
@@ -59,12 +62,6 @@
   margin: 60px 0;
 }
 
-// .transparent {
-//   opacity: 0.8;
-//   -moz-opacity: 0.7;
-//   filter: alpha(opacity=70);
-//   -khtml-opacity: 0.7;
-// }
 
 
 

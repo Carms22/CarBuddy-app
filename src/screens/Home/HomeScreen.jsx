@@ -19,7 +19,7 @@ const HomeScreen = () => {
         <div className=' container'>
           <div className='row'>
             <div className='col-sm m-1 card transparent info'>
-              <h3>Cars with only one passenger = traffic jam</h3>
+              <h3>Cars with only one passenger all the time</h3>
               <img className='' src={trafic} alt='trafic'/>
               <h5>There are so many cars going to the same place just with one person. Why don't you go with them?</h5>
               <h5>Check the journeys that goes where you work and decided what departure point is for you! </h5>
