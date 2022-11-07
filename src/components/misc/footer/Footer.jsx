@@ -8,10 +8,8 @@ function Footer() {
 		<footer className="footer-distributed">
 
 			<div className="footer-right">
-				<a href="https://www.linkedin.com/in/garciaguzman/"><i className="fa fa-linkedin"></i></a>
-				<a href="https://github.com/Carms22"><i className="fa fa-github"></i></a>
-        <i className="fas fa-address-card" color="#2980B9" size="2em"></i>
-        <i class="fa fa-camera-retro fa-lg"></i>
+				<a href="https://www.linkedin.com/in/garciaguzman/"><i className="fab fa-linkedin"></i></a>
+				<a href="https://github.com/Carms22"><i className="fab fa-github"></i></a>
 			</div>
 
 			<div className="footer-left">
