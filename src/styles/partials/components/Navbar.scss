@@ -1,10 +1,18 @@
 @import '../base/font';
+@import '../base/variables';
 
 .Navbar{
+  font-size: large;
+  background-color: $primary;
   font-family: $font-Varela;
-  
   opacity: 0.7;
   -moz-opacity: 0.7;
-  filter: alpha(opacity=70);
+  filter: alpha(opacity=90);
   -khtml-opacity: 0.7;
+  
+  img{
+    text-align: end;
+    max-width: 35px;
+  }
+
 }

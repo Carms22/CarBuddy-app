@@ -1,8 +1,12 @@
 import React from "react";
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { Link, NavLink } from 'react-router-dom';
 import '../../../styles/partials/components/Navbar.scss'
+import '../../../styles/partials/components/Card.scss'
 
 function Navbar(){
+  const { user } = useAuthContext();
+  console.log(user);
   return(
     <nav className= "Navbar navbar navbar-expand-lg main-nav">
     <div className="container">
@@ -15,32 +19,41 @@ function Navbar(){
         <li className="nav-item">
             <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
         </li>
-        {/* {
+        {
           user ?
-
+          <>
+            <li className="nav-item">
+              <NavLink to="/journeys" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Journeys</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Profile</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/journeys/create" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>New Journeys</NavLink>
+            </li>
+          </>
           :
-        } */}
-         
-          <li className="nav-item">
-            <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Profile</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/journeys" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Journeys</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/journeys/create" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>New Journeys</NavLink>
-          </li>
+          <>
+            <li className="nav-item">
+              <NavLink to="/register" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Register</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
+            </li>
+          </>
+        }    
           {/* <li className="nav-item">
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink>
           </li> */}
-          <li className="nav-item">
-            <NavLink to="/register" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Register</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink>
-          </li>
         </ul>
       </div>
+      { user &&
+        <div className="ml-auto mr-1">
+          <NavLink to="/profile" className="img-user">
+            <img className="img-user" src={user.image} alt="me"/>
+          </NavLink>
+        </div>
+      }
     </div>
   </nav>
   )
