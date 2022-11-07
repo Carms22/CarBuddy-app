@@ -2,6 +2,7 @@
 import {getJourneys} from "../services/JourneyService"
 
 const fetchJourneyData = () => {
+    
     const newFeaturesList = [];
     return getJourneys().then(journeys => {
 
@@ -20,7 +21,9 @@ const fetchJourneyData = () => {
           }
         })
       ))
+      console.log("nerfeatures............",newFeaturesList);
       return {
+        
         type: "FeatureCollection",
         features: newFeaturesList
       }

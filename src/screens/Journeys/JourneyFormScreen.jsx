@@ -65,7 +65,7 @@ function JourneyForm() {
 
   const handleSearchBar = (lat, long, text, fieldName) => {
     const value = {
-      location: [lat,long],
+      location: [long, lat],
       street: text,
     };
     setData({...data, [fieldName]: value})
@@ -105,7 +105,7 @@ function JourneyForm() {
         >
           <option value="" disabled>Select an option</option>
           <option value="Car">Car</option>
-          <option value="Motocycle">Motocycle</option>
+          <option value="Motorcycle">Motorcycle</option>
         </select>
 
         <SearchBar 
@@ -114,7 +114,7 @@ function JourneyForm() {
           handleSearchBar={handleSearchBar}
           placeholder="Origin of the journey"
         />
-
+        
         <SearchBar 
           name="destination"
           handleSearchBar={handleSearchBar}

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import mapboxgl from 'mapbox-gl';
@@ -11,12 +11,21 @@ mapboxgl.accessToken=
 "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDloY2tkdjQyZ29iM3BxdDg2enlmeTcwIn0.NgmXVYbTuJuWFyyxOxJC7Q"
 
 function MapComponent() {
-
+  const [journeys, setJourneys] = useState([])
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
+
+  const getJourneysAgain = useCallback(() =>{ 
+      // fetch new data
+      fetchJourneyData().then(results =>{
+        setJourneys(results)
+      })
+      .catch(err => console.log(err))
+  },[])
  
   // initialize map when component mounts
   useEffect(() => {
+    getJourneysAgain()
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       // See style options here: https://docs.mapbox.com/api/maps/#styles
@@ -55,13 +64,10 @@ function MapComponent() {
 
 
     map.on("moveend", async () => {
-      
-      // fetch new data
-      const results = await fetchJourneyData().then(results =>{
-        return results
-      })
-      // all layers that consume the "points-data" data source will be updated automatically
-      map.getSource("points-data").setData(results);
+      getJourneysAgain()
+        // all layers that consume the "points-data" data source will be updated automatically
+        map.getSource("points-data").setData(journeys);
+
     });
 
     // change cursor to pointer when user hovers over a clickable feature
