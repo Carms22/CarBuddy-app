@@ -51,23 +51,12 @@ function JourneyDetailScreen() {
       
     postScore(bookingId, {points: score})
         .then(score => {
-          console.log('onSubmit' , score);
           getBookings()
+          getDetails()
         })
   }
-  
-  console.log("journey", journey);
 
-  //Journey details
-  useEffect(() =>{
-    getJourneyDetail(id)
-      .then( journey => {
-        setJourney(journey)
-      })
-      .catch(err => console.log(err))
-  },[id,comment])
-
-  //bookings of the journey
+   //bookings of the journey
   const getBookings = useCallback(() => {
     getBookingsJourney(id)
       .then(bookings => {
@@ -76,12 +65,22 @@ function JourneyDetailScreen() {
       .catch(err => console.log(err))
   }, [id])
 
+  //Journey details
+  const getDetails = useCallback(() => {
+    getJourneyDetail(id)
+    .then( journey => {
+      setJourney(journey)
+    })
+    .catch(err => console.log(err))
+  },[id])
   
 
   useEffect(() =>{
     getBookings()
-  }, [getBookings])
+    getDetails()
+  }, [getBookings, getDetails])
 
+  console.log("journey", journey);
   return (
     <div className="container DetailScreen">
 
@@ -130,17 +129,16 @@ function JourneyDetailScreen() {
 
           <div className="container start-div">
           <h4 className="light"><strong>Passengers:</strong></h4>
-            { bookings.map(booking =>
-              <div className="last">
-                <div className="row driver card-detail">
-                  <div className="col-10 start">
-                    <h5>Buddy: {booking.user.name}</h5>
-                    <Rating>{calculateUserScore(booking.user.score)}</Rating>
+            { bookings && bookings.map(booking => 
+                <div className="last">
+                  <div className="row driver card-detail">
+                    <div className="col-10 start">
+                      <h5>Buddy: {booking.user.name}</h5>
+                      <Rating>{calculateUserScore(booking.user.score)}</Rating>
+                    </div>
+                    <img className="img-user" src={booking.user.image} alt="Buddy"/>
                   </div>
-                  <img className="img-user" src={booking.user.image} alt="Buddy"/>
-                </div>
-                <Link className="button" to={`/users/${booking.user.id}`}>Detail</Link>
-              </div> 
+                </div> 
             )     
             }
           </div>
@@ -184,7 +182,7 @@ function JourneyDetailScreen() {
       {/* Form to score journey */}
       <>
       <div className="container start-div">
-      { bookings.map(booking => 
+      {bookings && bookings.map(booking => 
         user.id===booking.user.id && !booking.isValidated ? 
           <div className="col-6" key={booking.id}>
             <form className="container row" onSubmit={onSubmitScore}>

@@ -29,6 +29,7 @@ function CreatorScreenDetail() {
       })
   },[id])
   
+  console.log("journeyByCreator", journeysByCreator);
   return ( 
     <div>
       { creator &&
