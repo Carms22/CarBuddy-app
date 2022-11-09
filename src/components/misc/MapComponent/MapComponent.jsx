@@ -11,16 +11,17 @@ mapboxgl.accessToken=
 "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDloY2tkdjQyZ29iM3BxdDg2enlmeTcwIn0.NgmXVYbTuJuWFyyxOxJC7Q"
 
 function MapComponent() {
-  const [journeys, setJourneys] = useState([])
+  //const [journeys, setJourneys] = useState([])
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
 
-  const getJourneysAgain = useCallback(() =>{ 
-    fetchJourneyData().then(results =>{
-      setJourneys(results)
-    })
-    .catch(err => console.log(err))
-  },[])
+  // const getJourneysAgain = useCallback(() =>{ 
+  //   fetchJourneyData().then(results =>{
+  //     console.log(results);
+  //     setJourneys(results)
+  //   })
+  //   .catch(err => console.log(err))
+  // },[])
  
   // initialize map when component mounts
   useEffect(() => {
@@ -44,6 +45,7 @@ function MapComponent() {
           features: []
         }
       });
+     
       // now add the layer, and reference the data source above by name
       map.addLayer({
         id: "points-layer",
@@ -54,16 +56,19 @@ function MapComponent() {
           "icon-image": "car-15", // this will put little cars on our map
           "icon-padding": 0,
           "icon-size": 1.2,
-          "icon-allow-overlap": true
+          "icon-allow-overlap": true,
         }
       });
     });
 
 
     map.on("moveend", async () => {
-      getJourneysAgain()
+      fetchJourneyData().then( result => {
+        map.getSource("points-data").setData(result);
+      })
+      //getJourneysAgain()
         // all layers that consume the "points-data" data source will be updated automatically
-      map.getSource("points-data").setData(journeys);
+      
     });
 
     // change cursor to pointer when user hovers over a clickable feature
@@ -108,15 +113,14 @@ function MapComponent() {
       } 
     });
         
-      // Add the geocoder to the map
-      map.addControl(geocoder);
+    // Add the geocoder to the map
+    map.addControl(geocoder);
     // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
 
     geocoder.on('result', (event) => {
       map.getSource('single-point').setData(event.result.geometry);
     });
 
-    console.log(journeys);
     // clean up on unmount
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

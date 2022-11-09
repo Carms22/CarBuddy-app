@@ -120,7 +120,7 @@ function JourneyDetailScreen() {
                   <h5>Driver: {journey.creator.name}</h5>
                   <Rating>{calculateUserScore(journey.creator.score)}</Rating>
                 </div>
-                <img className="img-user" src={journey.creator.image} alt="Buddy"/>
+                <img className="img-buddy" src={journey.creator.image} alt="Buddy"/>
               </div>
               <Link className="button" to={`/creators/${id}`}>Detail</Link>
             </div>
@@ -135,7 +135,7 @@ function JourneyDetailScreen() {
                       <h5>Buddy: {booking.user.name}</h5>
                       <Rating>{calculateUserScore(booking.user.score)}</Rating>
                     </div>
-                    <img className="img-user" src={booking.user.image} alt="Buddy"/>
+                    <img className="img-buddy" src={booking.user.image} alt="Buddy"/>
                   </div>
                 </div> 
                 )     

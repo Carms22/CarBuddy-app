@@ -46,10 +46,18 @@
       }
       img{
         text-align: end;
+        
       }
      
     }
   }
-  
+  .img-buddy{
+    padding: 0;
+    margin: 5px;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    object-fit: cover; 
+  }
 
 }

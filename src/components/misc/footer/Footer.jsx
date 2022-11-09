@@ -15,7 +15,6 @@ function Footer() {
 			<div className="footer-left">
 				<p className="footer-links">
 					<a href="/about">About</a>
-					<a href="/fac">Faq</a>
 					<a href="/contact">Contact</a>
 				</p>
         <p className="footer-links">
