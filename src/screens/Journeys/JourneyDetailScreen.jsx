@@ -52,13 +52,13 @@ function JourneyDetailScreen() {
       
     postScore(bookingId, {points: score})
         .then(score => {
-          getBookings()
+          getBookingsById()
           getDetails()
         })
   }
 
    //bookings of the journey
-  const getBookings = useCallback(() => {
+  const getBookingsById = useCallback(() => {
     getBookingsJourney(id)
       .then(bookings => {
         setBooking(bookings)
@@ -76,9 +76,10 @@ function JourneyDetailScreen() {
   },[id])
 
   useEffect(() =>{
-    getBookings()
+    getBookingsById()
     getDetails()
-  }, [getBookings, getDetails])
+  }, [getBookingsById, getDetails])
+  
 
   return (
     <div className="container DetailScreen">
@@ -148,7 +149,7 @@ function JourneyDetailScreen() {
             <h4 className="light"><strong>Comments:</strong></h4>
             <div className="row">
               { journey.comments ? journey.comments.map( (comment) => 
-                <div  className="col-4 card-detail" key={comment.id}>
+                <div  className="col-4 card-detail m-2" key={comment.id}>
                   <h5><strong>{comment.commentCreator.name}</strong></h5>
                   <p>{comment.content}</p>
                 </div> 

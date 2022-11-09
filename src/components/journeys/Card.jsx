@@ -6,7 +6,6 @@ import Rating from "./Rating";
 import '../../styles/partials/components/Card.scss'
 
 function Card({origin, destination, price, departureTime, date, id, creator, vehicle, score}){
-  console.log("creator", creator);
 
   return(
     <Link key={id} className="Link" to={`/journeys/${id}`} >

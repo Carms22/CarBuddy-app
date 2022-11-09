@@ -14,6 +14,7 @@ import JourneyDetailScreen from './screens/Journeys/JourneyDetailScreen';
 import ErrorScreen from '../src/screens/Error/ErrorScreen';
 import CreatorScreenDetail from './screens/Creator/CreatorScreenDetail';
 import Footer from './components/misc/footer/Footer';
+import { ContactUs } from './screens/Contact/Contact';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/journeys/:id/edit' element={<JourneyFormScreen/>}/>
 
         <Route path='/register' element={<Register/>}/>
+        <Route path='/contact' element={<ContactUs/>}/>
         <Route 
           path='/login' 
           element={

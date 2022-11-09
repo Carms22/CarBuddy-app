@@ -112,8 +112,8 @@ function UserDetailScreen() {
         { journeysOfUser ? journeysOfUser.map( journey =>
           <div className='link-card'>
             <Card className='card' {...journey} key={journey.id}/>
-            <button className='button col-4' onClick={() => handleDlete(journey.id)}>Delete</button>
-            <button className='button col-4' onClick={() => handleUpdate(journey.id)}>Edit</button>
+            <button className='button col-4 m-2' onClick={() => handleDlete(journey.id)}>Delete</button>
+            <button className='button col-4 m-2' onClick={() => handleUpdate(journey.id)}>Edit</button>
           </div>
         )
         :
