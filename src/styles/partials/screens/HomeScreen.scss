@@ -20,24 +20,24 @@
     color: $light
   }
   .header-home{
-  background:   url("../../image/home/cabecera-web.png");
-  min-height: 64vh;
-  width: 100%;
-  background-position: center 100%;
-  background-size: cover;
-  top: 0;
-  left: 0;
-  z-index: -1;
+    background:   url("../../image/home/cabecera-web.png");
+    min-height: 64vh;
+    width: 100%;
+    background-position: center 100%;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
   }
   div{
     justify-content: space-around;
   }
   .row{
-    margin: 40px 0;
+    margin: 20px 0;
   }
   .info{
     max-width: 300px;
-    padding: 10px;
+    padding: 5px;
     gap: 10px;
     img{
       max-height: 200px;
