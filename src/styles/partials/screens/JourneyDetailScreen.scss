@@ -7,6 +7,12 @@
   color: $primary;
   font-family: $font-Varela;
 
+  h5{
+    color: $light;
+    strong{
+      color: $primary;
+    }
+  }
   button{
     margin-bottom: 20px;
   }

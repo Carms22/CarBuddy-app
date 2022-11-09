@@ -1,0 +1,15 @@
+@import '../base/variables';
+@import '../base/font';
+
+.Popup{
+  text-align: center;
+  color: $primary;
+  font-family: $font-Varela;
+  h6{
+    strong{
+      color: $light;
+      margin: 10px 0;
+
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import '../../styles/partials/components/Rating.scss'
 
 const Rating = (props) => {
   const starts = Math.ceil(props.children);
@@ -23,7 +24,7 @@ const Rating = (props) => {
   }
   return (
     <div>
-      <h6> {numberStarts()}</h6>
+      <h6  className='Rating'> {numberStarts()}</h6>
     </div>
   )
 }

@@ -6,11 +6,16 @@
   border-radius: 10px;
   text-decoration:wavy;
   color: $primary;
-  margin: 10px 0;
-
-  &:hover {
-    color: rgb(137, 58, 202);
+  margin: 20px 0;
+ 
+ 
+  .contrast{
+    color: $light;
+    strong{
+      color: $primary;
+    }
   }
+ 
 }
 
 .link-card{
@@ -18,5 +23,6 @@
     text-decoration: none;
     color: white;
     cursor: pointer;
+    
   }
 }

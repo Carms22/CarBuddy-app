@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { createRoot } from 'react-dom/client';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import mapboxgl from 'mapbox-gl';
@@ -11,18 +11,9 @@ mapboxgl.accessToken=
 "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDloY2tkdjQyZ29iM3BxdDg2enlmeTcwIn0.NgmXVYbTuJuWFyyxOxJC7Q"
 
 function MapComponent() {
-  //const [journeys, setJourneys] = useState([])
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
-
-  // const getJourneysAgain = useCallback(() =>{ 
-  //   fetchJourneyData().then(results =>{
-  //     console.log(results);
-  //     setJourneys(results)
-  //   })
-  //   .catch(err => console.log(err))
-  // },[])
- 
+   
   // initialize map when component mounts
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -66,8 +57,7 @@ function MapComponent() {
       fetchJourneyData().then( result => {
         map.getSource("points-data").setData(result);
       })
-      //getJourneysAgain()
-        // all layers that consume the "points-data" data source will be updated automatically
+      // all layers that consume the "points-data" data source will be updated automatically
       
     });
 
@@ -105,7 +95,7 @@ function MapComponent() {
       accessToken: mapboxgl.accessToken, // Set the access token
       mapboxgl: mapboxgl, // Set the mapbox-gl instance
       marker: false, // Do not use the default marker style
-      placeholder: "Search for destination's journeys", // Placeholder text for the search bar
+      placeholder: "Search for journey destinations", // Placeholder text for the search bar
       bbox: [-4.118500,40.272136,-3.251267,40.574271], // Boundary for Madrid [lng, lat]
       proximity: {
         longitude: -3.684883,

@@ -31,19 +31,22 @@ function CreatorScreenDetail() {
   
   console.log("journeyByCreator", journeysByCreator);
   return ( 
-    <div>
+    <div className="User-screen container">
       { creator &&
         <div className="container">
-          <h4>Name: {creator.name}<img className='img-user' src={creator.image} alt="creator-img"/></h4>
+          <h2>Name: {creator.name}<img className='img-user' src={creator.image} alt="creator-img"/></h2>
           <Rating className="text-center">{rating}</Rating>
+          <h3 className="h-grey">Journeys of {creator.name}:</h3>
         </div>
       }
+      
       { journeysByCreator ? journeysByCreator.map( journey => 
-        <Card {...journey} key={journey.id} />
+        <div className='link-card'>
+          <Card  {...journey} key={journey.id} />
+        </div>
       )
       :
       <p>There is no journeys</p>
-
       }
     </div>
    );

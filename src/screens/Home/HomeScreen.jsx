@@ -22,20 +22,20 @@ const HomeScreen = () => {
               <h3>Cars with only one passenger all the time</h3>
               <img className='' src={trafic} alt='trafic'/>
               <h5>There are so many cars going to the same place just with one person. Why don't you go with them?</h5>
-              <h5>Check the journeys that goes where you work and decided what departure point is for you! </h5>
+              <h5>Check the journeys that goes where you work and decide what departure point is for you! </h5>
             </div>
             <div className='col-sm m-1 card transparent info'>
               <h3>Be the best Buddy going to work </h3>
               <img className='' src={buddy} alt='Buddy'/>
               <h5>
               Just if you go all days by car to work or you want to take advantage of others journeys, register and
-              start to share the way o way back to work!!
+              start to share the way or way back to work!!
               </h5>
             </div>
             <div className='col-sm m-1 card transparent info'>
               <h3>Check the journeys on the map</h3>
               <img className='' src={end} alt='end'/>
-              <h5>The map show all the destination rides available, click on the car to show the information of the journey</h5>
+              <h5>The map shows all the destination rides available, click on the car to show the information of the journey</h5>
             </div>
           </div>
         </div>

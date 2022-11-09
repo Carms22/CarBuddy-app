@@ -69,43 +69,45 @@ function UserDetailScreen() {
       })
   },[getJourneysOfCreator])
 
-  console.log("journeys", journeysOfUser);
-
   //PROFILE 
   return ( 
-    <div className='container'>
+    <div className='container User-screen'>
       <div className='row text-center'>
-        <h3 className='col-12'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h3>
+        <h2 className='col-12'>Welcome to your profile {user.name} <img className='img-user' src={user.image} alt='Buddy'/></h2>
         <Rating className="text-center">{score}</Rating>
         <button className="button" onClick={handleLogout}>Logout</button>
       </div>
 
-      <h3>My booking: </h3>
+      <h3 className='h-grey'>My booking: </h3>
       <div className='container'>
-        {bookings && bookings.map(booking => 
+        {bookings ? bookings.map(booking => 
           <>
             <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
               <div className='row card-body'>
                 <div className='col-6'>
-                  <h6><strong>From: </strong>{booking.journey.origin.street}</h6>
-                  <h6><strong>To: </strong>{booking.journey.destination.street}</h6>
-                  <h6><strong>Departure time: </strong>{booking.journey.departureTime.toString()}</h6>
-                  <h6><strong>Date: </strong>{moment(booking.journey.date).format('DD/MM/YYYY')}</h6>
+                  <h6 className='contrast'>From: <strong>{booking.journey.origin.street}</strong></h6>
+                  <h6 className='contrast'>To: <strong>{booking.journey.destination.street}</strong></h6>
+                  <h6 className='contrast'>Departure time: <strong>{booking.journey.departureTime.toString()}</strong></h6>
+                  <h6 className='contrast'>Date: <strong>{moment(booking.journey.date).format('DD/MM/YYYY')}</strong></h6>
                 </div>
                 <div className='col-6'>
-                  <h6><strong>Driver buddy: </strong>{booking.journey.creator.name} <img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h6>
-                  <h6><strong>Price: </strong>{parsePrice(booking.journey.price)}</h6>
-                  <h6><strong>Seats left: </strong>{booking.journey.vehicle.seats}</h6>
+                  <h6 className='contrast'>Driver buddy: <strong>{booking.journey.creator.name} </strong><img className='img-user' src={booking.journey.creator.image} alt='buddy'/></h6>
+                  <h6 className='contrast'>Price: <strong>{parsePrice(booking.journey.price)}</strong></h6>
+                  <h6 className='contrast'>Seats left: <strong>{booking.journey.vehicle.seats}</strong></h6>
                   <Rating>{calculateUserScore(booking.journey.creator.score)}</Rating>
                 </div>
               </div>
             </Link>
           </>
           )
+          :
+          <>
+            <h6>You have not bookings yet</h6>
+          </>
         }
       </div>
 
-      <h3>My Journeys</h3>
+      <h3 className='h-grey'>My Journeys</h3>
       <div className='container'>
         { journeysOfUser ? journeysOfUser.map( journey =>
           <div className='link-card'>
@@ -118,8 +120,6 @@ function UserDetailScreen() {
          <p>You have not create any journey</p> 
         }
       </div>
-
-      
     </div>
    );
 }

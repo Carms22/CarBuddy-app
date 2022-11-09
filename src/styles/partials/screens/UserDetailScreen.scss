@@ -1,3 +1,29 @@
+@import '../base/variables';
+@import '../base/font';
+
+.User-screen{
+  text-align: center;
+  color: $primary;
+  font-family: $font-Varela;
+
+  .h-grey{
+    color: $light;
+    margin: 10px 0;
+    font-weight: bold;
+    strong{
+      color: $primary;
+    }
+  }
+  h2 {
+    margin: 20px 0;
+    font-weight: bold;
+  }
+  button{
+    margin: 20px auto;
+    max-width: 200px;
+  }
+}
+
 .img-user {
   margin: 5px;
   height: 65px;

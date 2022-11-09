@@ -117,7 +117,7 @@ function JourneyDetailScreen() {
               <h4 className="light"><strong>Driver:</strong></h4>
               <div className="row driver card-detail">
                 <div className="col-8 start">
-                  <h5>Driver: {journey.creator.name}</h5>
+                  <h5>Driver: <strong>{journey.creator.name}</strong></h5>
                   <Rating>{calculateUserScore(journey.creator.score)}</Rating>
                 </div>
                 <img className="img-buddy" src={journey.creator.image} alt="Buddy"/>
@@ -128,17 +128,19 @@ function JourneyDetailScreen() {
 
           <div className="container start-div">
           <h4 className="light"><strong>Passengers:</strong></h4>
-            { bookings && bookings.map(booking => 
+            { bookings ? bookings.map(booking => 
                 <div className="last">
                   <div className="row driver card-detail">
                     <div className="col-8 start">
-                      <h5>Buddy: {booking.user.name}</h5>
+                      <h5>Buddy: <strong>{booking.user.name}</strong></h5>
                       <Rating>{calculateUserScore(booking.user.score)}</Rating>
                     </div>
                     <img className="img-buddy" src={booking.user.image} alt="Buddy"/>
                   </div>
                 </div> 
-                )     
+                ) 
+                :
+                <h6>There is not Passengers yet</h6>    
             }
           </div>
 
