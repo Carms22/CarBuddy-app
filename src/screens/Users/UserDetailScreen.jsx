@@ -80,7 +80,7 @@ function UserDetailScreen() {
 
       <h3 className='h-grey'>My booking: </h3>
       <div className='container'>
-        {bookings ? bookings.map(booking => 
+        {bookings.length > 0 ? bookings.map(booking => 
           <>
             <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
               <div className='row card-body'>
@@ -109,7 +109,7 @@ function UserDetailScreen() {
 
       <h3 className='h-grey'>My Journeys</h3>
       <div className='container'>
-        { journeysOfUser ? journeysOfUser.map( journey =>
+        { journeysOfUser.length > 0 ? journeysOfUser.map( journey =>
           <div className='link-card'>
             <Card className='card' {...journey} key={journey.id}/>
             <button className='button col-4 m-2' onClick={() => handleDlete(journey.id)}>Delete</button>

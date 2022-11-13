@@ -2,7 +2,7 @@
 
 .card{
   border: 1px solid $primary;
-  box-shadow: 0 10px 10px rgba(0,0,0,.4);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,.4);
   border-radius: 10px;
   text-decoration:wavy;
   color: $primary;
@@ -15,7 +15,6 @@
       color: $primary;
     }
   }
- 
 }
 
 .link-card{
@@ -23,6 +22,5 @@
     text-decoration: none;
     color: white;
     cursor: pointer;
-    
   }
 }

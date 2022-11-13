@@ -52,7 +52,7 @@ function JourneysList (){
           </div>
         </form>
         <div className="container link-card">
-          { journeys?
+          { journeys ?
             journeys.map( journey => (
             <Card {...journey} key={journey.id}/>
           ))
