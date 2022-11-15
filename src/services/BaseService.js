@@ -4,6 +4,7 @@ import { getAccessToken, logout } from "../store/AccessTokenStore";
 const createHttp = (useAccessToken = false) => {
   const http = axios.create({
     baseURL: process.env.REACT_APP_URI || "http://localhost:3001/api",
+    //REACT_APP_URI=https://carbuddy.cyclic.app/api
   });
     http.interceptors.request.use((request) => {
       if (useAccessToken && getAccessToken()) {

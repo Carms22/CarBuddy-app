@@ -129,8 +129,8 @@ function JourneyDetailScreen() {
 
           <div className="container start-div">
           <h4 className="light"><strong>Passengers:</strong></h4>
-            { bookings ? bookings.map(booking => 
-                <div className="last">
+            { bookings ? bookings.map((booking, index) => 
+                <div className="last" key={booking.id+index}>
                   <div className="row driver card-detail">
                     <div className="col-8 start">
                       <h5>Buddy: <strong>{booking.user.name}</strong></h5>
@@ -184,9 +184,9 @@ function JourneyDetailScreen() {
       {/* Form to score journey */}
       <>
       <div className="container start-div">
-      {bookings && bookings.map(booking => 
+      {bookings && bookings.map((booking, index) => 
         user.id===booking.user.id && !booking.isValidated ? 
-          <div className="col-6" key={booking.id}>
+          <div className="col-6" key={booking.id+index}>
             <form className="container row" onSubmit={onSubmitScore}>
               <input type="hidden" name="bookingId" value={booking.id}/>
               <h4><label className="light">Evaluate the journey</label></h4>

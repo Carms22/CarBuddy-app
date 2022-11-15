@@ -80,9 +80,9 @@ function UserDetailScreen() {
 
       <h3 className='h-grey'>My booking: </h3>
       <div className='container'>
-        {bookings.length > 0 ? bookings.map(booking => 
+        {bookings.length > 0 ? bookings.map((booking, index) => 
           <>
-            <Link className='card' key={booking.journey.id} to={`/journeys/${booking.journey.id}`}>
+            <Link className='card' key={booking.journey.id+index} to={`/journeys/${booking.journey.id}`}>
               <div className='row card-body'>
                 <div className='col-6'>
                   <h6 className='contrast'>From: <strong>{booking.journey.origin.street}</strong></h6>
