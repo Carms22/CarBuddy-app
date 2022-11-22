@@ -15,6 +15,7 @@ import ErrorScreen from '../src/screens/Error/ErrorScreen';
 import CreatorScreenDetail from './screens/Creator/CreatorScreenDetail';
 import Footer from './components/misc/footer/Footer';
 import { ContactUs } from './screens/Contact/Contact';
+import PaymentScreen from './screens/PaymentScreen/PaymentScreen';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
         <Route path='/register' element={<Register/>}/>
         <Route path='/contact' element={<ContactUs/>}/>
+        <Route path='/payment/:id' element={<PaymentScreen/>}/>
         <Route 
           path='/login' 
           element={

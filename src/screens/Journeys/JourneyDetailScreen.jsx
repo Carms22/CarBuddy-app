@@ -40,7 +40,7 @@ function JourneyDetailScreen() {
   //Booking and score booking
   const handleOnclick =() =>{
     postBooking(id)
-      .then(booking => navigate("/profile") )  
+      .then(booking => navigate(`/payment/${id}`) )  
   }
   const handleOnChangeScore = (event) => {
     const { value } = event.target;
