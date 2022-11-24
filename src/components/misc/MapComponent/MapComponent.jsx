@@ -12,6 +12,7 @@ mapboxgl.accessToken=
 "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDlmenV0a2UwYXgyM3BrMmZrMDRiY2V5In0.gVzmHY0xPCaZM3BZNfR8nA"
 
 function MapComponent() {
+  
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
    
