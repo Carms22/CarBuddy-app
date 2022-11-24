@@ -7,6 +7,7 @@ import "../../../styles/partials/components/MapComponent.scss";
 import fetchJourneyData from "../../../data/journeys";
 
 
+
 mapboxgl.accessToken=
 "pk.eyJ1IjoiY2FybXNieWRkeSIsImEiOiJjbDlmenV0a2UwYXgyM3BrMmZrMDRiY2V5In0.gVzmHY0xPCaZM3BZNfR8nA"
 
