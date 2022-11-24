@@ -14,12 +14,5 @@ export const getListYourJourneys = () =>
 export const getDetail = (id) => 
   http.get(`/users/${id}`).then((res) => res);
 
-
-// export const updateUser = (id, body) =>
-//   http.post(`/users/${id}`, body).then((res) => res);
-
-// export const deleteUser = (id) =>
-//   http.delete(`/users/${id}`).then((res) => res);""
-
 export const getCreator = (id) => 
   http.get(`/creators/${id}`).then((res) => res);

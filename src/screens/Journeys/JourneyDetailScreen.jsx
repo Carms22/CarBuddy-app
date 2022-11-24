@@ -84,7 +84,11 @@ function JourneyDetailScreen() {
   return (
     <div className="container DetailScreen">
       
-      { !journey ? "Loaiding" 
+      { !journey ? (
+        <div class="spinner-border text-secondary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      ) 
       :
       <>
       <div className="container">
@@ -155,7 +159,9 @@ function JourneyDetailScreen() {
                 </div> 
                 )
                 :
-                "Loading..."
+                <div class="spinner-border text-secondary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
               }
             </div>
           </div>
