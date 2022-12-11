@@ -51,6 +51,7 @@ function JourneysList (){
             <button className="button col-4" type="submit" onClick={() => onClear()}>Clear</button>
           </div>
         </form>
+
         <div className="container link-card">
           { journeys ?
             journeys.map( journey => (
@@ -59,9 +60,8 @@ function JourneysList (){
           :
           <p>No journey this time</p>
           }
-          
-        </div>
-        
+        </div> 
+         
     </div>
   )
 }

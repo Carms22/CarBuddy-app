@@ -119,7 +119,12 @@ function JourneyDetailScreen() {
                 }
               </div>
             </div>
-            <button className="button text-center" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button> 
+            {
+              user?
+              <button className="button text-center" onClick={handleOnclick} disabled={ journey.vehicle.seats < 1} >Reserve it</button>
+              :
+              <button className="button text-center" onClick={navigate("/login")}>Login to book</button>
+            }
 
             <div className="last">
               <h4 className="light"><strong>Driver:</strong></h4>

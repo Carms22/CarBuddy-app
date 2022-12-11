@@ -41,9 +41,10 @@ const HomeScreen = () => {
         </div>
       </div>
 
-      <div className='container Map'>
+      <div className='Map'>
         <h2>Check the buddies that goes to your work destination</h2>
         <MapComponent />
+
       </div>
 
         <div className="row">     

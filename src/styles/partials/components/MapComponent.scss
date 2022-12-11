@@ -1,5 +1,6 @@
 .map-container {
-  margin: 20px 0;
+  width: 99vw;
+  object-position: center;
   height: 50vh;
 }
 
@@ -10,9 +11,9 @@
   -webkit-tap-highlight-color: rgba(13, 21, 69, 0);
 }
 .mapboxgl-ctrl-top-right {
-  width: 90%;
+  width: 80%;
   &.mapboxgl-ctrl-geocoder{
-    width: 90%;
+    width: 80%;
   }
 }
 
